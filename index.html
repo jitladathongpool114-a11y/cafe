@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudySpot - คาเฟ่และสถานที่อ่านหนังสือราคานักศึกษา</title>
+  <style>
+    :root {
+      --primary: #f5476d;
+      --primary-hover: #e03358;
+      --bg: #f7f7f7;
+      --card-bg: #ffffff;
+      --text: #1F2937;
+      --text-muted: #6B7280;
+      --tag-bg: #EEF2FF;
+      --tag-text: #3730A3;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Kanit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      border: 1px solid #E5E7EB;
+      position: relative;
+    }
+
+    .header {
+      padding: 1.25rem 1.25rem 0.75rem;
+      background: var(--card-bg);
+      border-bottom: 1px solid #F3F4F6;
+    }
+
+    .user-profile {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .greeting {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .username {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #FFE4E8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Search Box */
+    .search-box {
+      margin-bottom: 0.75rem;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.6rem 1rem 0.6rem 2.2rem;
+      border-radius: 12px;
+      border: 1px solid #E5E7EB;
+      font-size: 0.85rem;
+      outline: none;
+      background-color: #F9FAFB;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      background-color: #FFF;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Filter Chips */
+    .filter-group {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+      scrollbar-width: none;
+    }
+
+    .filter-group::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-chip {
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      border: 1px solid #E5E7EB;
+      background: #FFFFFF;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-chip.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Content Area */
+    .content-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .place-card {
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #FFFFFF;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .place-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .place-img-container {
+      position: relative;
+      width: 100%;
+      height: 140px;
+    }
+
+    .place-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-color: #E5E7EB;
+    }
+
+    .bookmark-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .place-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #F9FAFB;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.78rem;
+      color: #4B5563;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-weight: 500;
+    }
+
+    .place-info {
+      padding: 1rem;
+    }
+
+    .place-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.3rem;
+    }
+
+    .place-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .place-price {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #059669;
+      background: #ECFDF5;
+      padding: 0.2rem 0.5rem;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    .place-location {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .place-highlight {
+      font-size: 0.8rem;
+      color: #4B5563;
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 0.15rem 0.45rem;
+      border-radius: 6px;
+    }
+
+    /* Detail Modal */
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: flex-end;
+      z-index: 100;
+    }
+
+    .modal-content {
+      background: #FFF;
+      width: 100%;
+      max-height: 85%;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      padding: 1.25rem;
+      overflow-y: auto;
+      animation: slideUp 0.25s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .close-btn {
+      background: #F3F4F6;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .info-row {
+      display: flex;
+      gap: 0.5rem;
+      color: var(--text);
+    }
+
+    .info-label {
+      font-weight: 600;
+      min-width: 90px;
+      color: var(--text-muted);
+    }
+
+    .action-btn {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Navigation Bar */
+    .nav-bar {
+      display: flex;
+      justify-content: space-around;
+      padding: 0.75rem 0;
+      border-top: 1px solid #F3F4F6;
+      background: #FFFFFF;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .nav-icon {
+      font-size: 1.2rem;
+      margin-bottom: 0.1rem;
+      background: none;
+      border: none;
+    }
+
+    /* Profile Card */
+    .profile-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .profile-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Header -->
+    <header class="header">
+      <div class="user-profile">
+        <div>
+          <div class="greeting">Welcome Student 👋</div>
+          <div class="username" id="headerTitle">พิกัดที่อ่านหนังสือวันนี้</div>
+        </div>
+        <div class="avatar" onclick="switchNavToProfile()">ST</div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-box" id="searchBoxContainer">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="ค้นหาชื่อคาเฟ่ หรือทำเล..." oninput="handleSearch()">
+      </div>
+
+      <!-- Quick Filter Buttons -->
+      <div class="filter-group" id="filterGroupContainer">
+        <button class="filter-chip active" onclick="filterPlaces('all', this)">ทั้งหมด</button>
+        <button class="filter-chip" onclick="filterPlaces('budget', this)">🟢 งบไม่เกิน 60฿</button>
+        <button class="filter-chip" onclick="filterPlaces('24h', this)">🌙 เปิด 24 ชั่วโมง</button>
+        <button class="filter-chip" onclick="filterPlaces('plug', this)">🔌 ปลั๊กเยอะ</button>
+      </div>
+    </header>
+
+    <!-- Main Content List -->
+    <main class="content-area" id="placeList">
+      <!-- Cards render dynamically via JavaScript -->
+    </main>
+
+    <!-- Modal Detail View -->
+    <div class="modal-overlay" id="detailModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title" id="modalName">ชื่อสถานที่</div>
+          <button class="close-btn" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <!-- Modal content details render dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+      <div class="nav-item active" id="navSearch" onclick="switchNav(this, 'ค้นหา')">
+        <button class="nav-icon">🔍</button>
+        <span>ค้นหา</span>
+      </div>
+      <div class="nav-item" id="navBookmark" onclick="switchNav(this, 'บุ๊กมาร์ก')">
+        <button class="nav-icon">⭐</button>
+        <span>รายการโปรด</span>
+      </div>
+      <div class="nav-item" id="navMap" onclick="switchNav(this, 'แผนที่')">
+        <button class="nav-icon">📍</button>
+        <span>แผนที่</span>
+      </div>
+      <div class="nav-item" id="navProfile" onclick="switchNav(this, 'โปรไฟล์')">
+        <button class="nav-icon">👤</button>
+        <span>โปรไฟล์</span>
+      </div>
+    </nav>
+  </div>
+
+  <script>
+    // Detailed Places Data
+    const places = [
+      {
+        id: 1,
+        name: "Ruma Cafe & Co-Working Space",
+        price: "เริ่มต้น 45฿",
+        detail: "ถนนบรมไตรโลกนารถ (ใกล้แยกวัดจันทร์)",
+        highlight: "คาเฟ่บรรยากาศโปร่ง มีโซนเงียบสงบสำหรับอ่านหนังสือสอบ ปลั๊กไฟเข้าถึงได้เกือบทุกโต๊ะ",
+        hours: "เปิด 24 ชั่วโมง",
+        phone: "081-234-5678",
+        parking: "มีที่จอดรถยนต์และจักรยานยนต์",
+        recommendedMenu: "Matcha Latte (55฿), Croissant (45฿)",
+        distanceKm: 1.2,
+        travelTimeMin: 4,
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=500&q=80",
+        tags: ["🌙 เปิด 24h", "🔌 ปลั๊กทุกโต๊ะ", "📶 Wi-Fi แรง"],
+        categories: ["24h", "plug"],
+        lat: 16.8210,
+        lng: 100.2650
+      },
+      {
+        id: 2,
+        name: "tham.coffee workspace",
+        price: "เริ่มต้น 50฿",
+        detail: "ชั้น 2 ไทยมาร์ท (ฝั่งท็อปส์มาร์เก็ต)",
+        highlight: "ดีไซน์สไตล์มินิมอล มีโซน Quiet Zone เงียบสงบ เหมาะกับการนั่งทำงานใช้ความคิดสูง",
+        hours: "08:00 - 20:00 น.",
+        phone: "089-876-5432",
+        parking: "จอดรถในลานจอดไทยมาร์ทฟรี",
+        recommendedMenu: "Dirty Coffee (65฿), Drip Coffee (80฿)",
+        distanceKm: 2.5,
+        travelTimeMin: 7,
+        image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=500&q=80",
+        tags: ["🔇 Quiet Zone", "🔌 ปลั๊กเยอะ", "🟢 งบประหยัด"],
+        categories: ["budget", "plug"],
+        lat: 16.8150,
+        lng: 100.2580
+      },
+      {
+        id: 3,
+        name: "MINDMOST COFFEE",
+        price: "เริ่มต้น 55฿",
+        detail: "ถนนสนามบิน (ตรงข้ามโรงเรียนพุทธชินราช)",
+        highlight: "คาเฟ่โทนอุ่น แอร์เย็นสบาย บริการเป็นกันเอง ขนมเบเกอรี่อบใหม่สดใหม่ทุกวัน",
+        hours: "07:30 - 18:00 น.",
+        phone: "055-123-456",
+        parking: "จอดรถริมถนนหน้าร้าน",
+        recommendedMenu: "Americano Orange (60฿), Banoffee Pie (65฿)",
+        distanceKm: 0.8,
+        travelTimeMin: 3,
+        image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=500&q=80",
+        tags: ["🟢 งบประหยัด", "❄️ แอร์เย็น", "🍰 มีขนม"],
+        categories: ["budget"],
+        lat: 16.8080,
+        lng: 100.2700
+      },
+      {
+        id: 4,
+        name: "Jadeology Specialty Coffee",
+        price: "เริ่มต้น 65฿",
+        detail: "ซอยทิพย์เสนา (หลังธนาคารกรุงเทพ)",
+        highlight: "ร้านกาแฟสำหรับคนรักเมล็ดคั่วพิเศษ บรรยากาศเงียบสงบ เหมาะกับการอ่านหนังสือแบบชิลๆ",
+        hours: "08:30 - 17:30 น.",
+        phone: "082-999-8888",
+        parking: "มีลานจอดรถข้างร้าน",
+        recommendedMenu: "Specialty Cold Brew (75฿), Lemon Tart (70฿)",
+        distanceKm: 1.8,
+        travelTimeMin: 5,
+        image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=500&q=80",
+        tags: ["☕ กาแฟดี", "🔌 มีปลั๊กบางจุด", "🌿 บรรยากาศชิล"],
+        categories: [],
+        lat: 16.8250,
+        lng: 100.2600
+      },
+      {
+        id: 5,
+        name: "24/7 Study Lounge & Cafe",
+        price: "เริ่มต้น 40฿",
+        detail: "หน้ามหาวิทยาลัย (ฝั่งประตู 1)",
+        highlight: "เลานจ์อ่านหนังสือสำหรับนักศึกษาโดยเฉพาะ ราคาประหยัด มีโซนที่นั่งเดี่ยวและโต๊ะกลุ่ม",
+        hours: "เปิด 24 ชั่วโมง",
+        phone: "061-111-2222",
+        parking: "จอดจักรยานยนต์หน้าร้าน",
+        recommendedMenu: "Thai Milk Tea (40฿), Toast with Butter (35฿)",
+        distanceKm: 0.5,
+        travelTimeMin: 2,
+        image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=500&q=80",
+        tags: ["🌙 เปิด 24h", "🔌 ปลั๊กเยอะ", "🟢 งบประหยัด"],
+        categories: ["24h", "budget", "plug"],
+        lat: 16.8280,
+        lng: 100.2620
+      },
+      {
+        id: 6,
+        name: "The Library Crafts & Coffee",
+        price: "เริ่มต้น 50฿",
+        detail: "ข้างห้องสมุดประชาชนจังหวัด",
+        highlight: "คาเฟ่ธีมห้องสมุด มีหนังสือให้อ่านฟรี โทนร้านเงียบสงบ งดใช้เสียงดัง เหมาะกับการอ่านสอบ",
+        hours: "09:00 - 19:00 น.",
+        phone: "086-555-4433",
+        parking: "จอดรถในพื้นที่ห้องสมุดประชาชน",
+        recommendedMenu: "Cocoa Intense (50฿), Waffle (45฿)",
+        distanceKm: 1.5,
+        travelTimeMin: 5,
+        image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=500&q=80",
+        tags: ["🔇 Quiet Zone", "🟢 งบประหยัด", "📶 Wi-Fi แรง"],
+        categories: ["budget"],
+        lat: 16.8190,
+        lng: 100.2670
+      },
+      {
+        id: 7,
+        name: "Owl Night Hub Cafe",
+        price: "เริ่มต้น 60฿",
+        detail: "ซอยหลังมหาลัย (ตรงข้ามหอพักรับโชค)",
+        highlight: "ฮับของคนนอนดึก มีอาหารจานเดียวทานง่าย และเครื่องดื่มชูกำลังให้บริการตลอดคืน",
+        hours: "เปิด 24 ชั่วโมง",
+        phone: "084-333-2211",
+        parking: "มีลานจอดกว้างขวาง",
+        recommendedMenu: "Espresso Double Shot (60฿), ข้าวผัดกะเพรา (59฿)",
+        distanceKm: 0.9,
+        travelTimeMin: 3,
+        image: "https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=500&q=80",
+        tags: ["🌙 เปิด 24h", "🔌 ปลั๊กทุกโต๊ะ", "🍕 มีอาหาร"],
+        categories: ["24h", "budget", "plug"],
+        lat: 16.8330,
+        lng: 100.2590
+      },
+      {
+        id: 8,
+        name: "Plug-In Co-Working Space",
+        price: "เริ่มต้น 55฿",
+        detail: "ถนนมิตรภาพ (ใกล้แยกโคกคีรี)",
+        highlight: "เน้นสายทำงานออนไลน์และติวกลุ่ม มีบริการเครื่องปริ้นเอกสาร และห้องประชุมเช่ารายชั่วโมง",
+        hours: "08:00 - 22:00 น.",
+        phone: "055-987-654",
+        parking: "มีที่จอดรถข้างอาคาร",
+        recommendedMenu: "Latte Cold (55฿), Sandwich Ham Cheese (49฿)",
+        distanceKm: 2.1,
+        travelTimeMin: 6,
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=500&q=80",
+        tags: ["🔌 ปลั๊กเยอะ", "🟢 งบประหยัด", "🖨️ มีบริการปริ้นท์"],
+        categories: ["budget", "plug"],
+        lat: 16.8120,
+        lng: 100.2740
+      },
+      {
+        id: 9,
+        name: "Space Cafe & Slow Bar",
+        price: "เริ่มต้น 60฿",
+        detail: "ใกล้หอนาฬิกาเมืองพิษณุโลก",
+        highlight: "สโลว์บาร์บรรยากาศสบายๆ เพลงเบาๆ ไม่รบกวนสมาธิ เหมาะกับการอ่านหนังสือจิบกาแฟชิลๆ",
+        hours: "07:00 - 17:00 น.",
+        phone: "083-777-1122",
+        parking: "จอดรถบริเวณรอบหอนาฬิกา",
+        recommendedMenu: "Syphon Coffee (70฿), Matcha Cake (65฿)",
+        distanceKm: 1.1,
+        travelTimeMin: 4,
+        image: "https://images.unsplash.com/photo-1508766917616-d22f3f1eea14?auto=format&fit=crop&w=500&q=80",
+        tags: ["☕ กาแฟดี", "🔌 มีปลั๊กบางจุด", "🟢 งบประหยัด"],
+        categories: ["budget"],
+        lat: 16.8230,
+        lng: 100.2630
+      }
+    ];
+
+    const userInfo = {
+      name: "นักเรียน/นักศึกษา ",
+      location: "ตำบลพลายชุมพล อำเภอเมืองพิษณุโลก จังหวัดพิษณุโลก",
+      lat: 16.8310,
+      lng: 100.2610
+    };
+
+    let bookmarkedIds = [];
+    let currentTab = 'ค้นหา';
+    let currentCategory = 'all';
+
+    function renderPlaces(data) {
+      const container = document.getElementById('placeList');
+      container.innerHTML = '';
+
+      if (data.length === 0) {
+        container.innerHTML = `<div style="text-align: center; color: var(--text-muted); margin-top: 3rem;">ไม่พบสถานที่ที่คุณกำลังค้นหา</div>`;
+        return;
+      }
+
+      data.forEach(place => {
+        const card = document.createElement('div');
+        card.className = 'place-card';
+        const isBookmarked = bookmarkedIds.includes(place.id);
+
+        card.innerHTML = `
+          <div class="place-img-container">
+            <button class="bookmark-btn" onclick="toggleBookmark(event, ${place.id})">${isBookmarked ? '⭐' : '🤍'}</button>
+            <img src="${place.image}" alt="${place.name}" class="place-img" onclick="openDetailModal(${place.id})" />
+          </div>
+          
+          <div class="place-meta-bar" onclick="openDetailModal(${place.id})">
+            <div class="meta-item">
+              <span>🕒</span> ${place.hours}
+            </div>
+            <div class="meta-item">
+              <span>📍</span> ${place.distanceKm} กม. (${place.travelTimeMin} นาที)
+            </div>
+          </div>
+
+          <div class="place-info" onclick="openDetailModal(${place.id})">
+            <div class="place-title-row">
+              <div class="place-name">${place.name}</div>
+              <div class="place-price">${place.price}</div>
+            </div>
+            <div class="place-location">📍 ${place.detail}</div>
+            <div class="place-highlight">${place.highlight}</div>
+            <div class="feature-tags">
+              ${place.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openDetailModal(placeId) {
+      const place = places.find(p => p.id === placeId);
+      if (!place) return;
+
+      document.getElementById('modalName').textContent = place.name;
+      const modalBody = document.getElementById('modalBody');
+      
+      modalBody.innerHTML = `
+        <img src="${place.image}" alt="${place.name}" class="modal-img" />
+        <div class="info-row"><span class="info-label">ราคาเริ่มต้น:</span> <span>${place.price}</span></div>
+        <div class="info-row"><span class="info-label">ทำเลที่ตั้ง:</span> <span>${place.detail}</span></div>
+        <div class="info-row"><span class="info-label">เวลาเปิด-ปิด:</span> <span>${place.hours}</span></div>
+        <div class="info-row"><span class="info-label">จุดเด่น:</span> <span>${place.highlight}</span></div>
+        <div class="info-row"><span class="info-label">เมนูแนะนำ:</span> <span>${place.recommendedMenu}</span></div>
+        <div class="info-row"><span class="info-label">การจอดรถ:</span> <span>${place.parking}</span></div>
+        <div class="info-row"><span class="info-label">เบอร์ติดต่อ:</span> <span>${place.phone}</span></div>
+        <div class="feature-tags" style="margin-top: 0.5rem;">
+          ${place.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+        </div>
+        <button class="action-btn" onclick="openMap(${place.lat}, ${place.lng}, '${place.name}')">
+          📍 เปิดแผนที่ Google Maps นำทาง
+        </button>
+      `;
+
+      document.getElementById('detailModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('detailModal').style.display = 'none';
+    }
+
+    function handleSearch() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filtered = places.filter(p => 
+        (p.name.toLowerCase().includes(query) || p.detail.toLowerCase().includes(query) || p.highlight.toLowerCase().includes(query)) &&
+        (currentCategory === 'all' || p.categories.includes(currentCategory))
+      );
+      renderPlaces(filtered);
+    }
+
+    function toggleBookmark(event, placeId) {
+      event.stopPropagation();
+      const index = bookmarkedIds.indexOf(placeId);
+      if (index > -1) {
+        bookmarkedIds.splice(index, 1);
+      } else {
+        bookmarkedIds.push(placeId);
+      }
+      
+      if (currentTab === 'ค้นหา') {
+        handleSearch();
+      } else if (currentTab === 'บุ๊กมาร์ก') {
+        renderBookmarks();
+      }
+    }
+
+    function renderBookmarks() {
+      const bookmarkedPlaces = places.filter(p => bookmarkedIds.includes(p.id));
+      renderPlaces(bookmarkedPlaces);
+    }
+
+    function renderProfile() {
+      const container = document.getElementById('placeList');
+      container.innerHTML = `
+        <div class="profile-card">
+          <div class="profile-title">ข้อมูลส่วนตัวผู้ใช้</div>
+          <div class="info-row"><span class="info-label">ชื่อ-นามสกุล:</span> <span>${userInfo.name}</span></div>
+          <div class="info-row"><span class="info-label">รหัสนักศึกษา:</span> <span>${userInfo.studentId}</span></div>
+          <div class="info-row"><span class="info-label">พิกัดปัจจุบัน:</span> <span>${userInfo.location}</span></div>
+          <button class="action-btn" style="margin-top: 0.5rem;" onclick="openMap(${userInfo.lat}, ${userInfo.lng}, 'พิกัดของฉัน')">📍 เปิดแผนที่พิกัดของฉัน</button>
+        </div>
+      `;
+    }
+
+    function filterPlaces(category, element) {
+      currentCategory = category;
+      document.querySelectorAll('.filter-chip').forEach(btn => btn.classList.remove('active'));
+      element.classList.add('active');
+      handleSearch();
+    }
+
+    function openMap(lat, lng, name) {
+      const url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&query_place_name=${encodeURIComponent(name)}`;
+      window.open(url, '_blank');
+    }
+
+    function switchNav(element, pageName) {
+      currentTab = pageName;
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+      element.classList.add('active');
+      navigateTo(pageName);
+    }
+
+    function switchNavToProfile() {
+      const profileNav = document.getElementById('navProfile');
+      switchNav(profileNav, 'โปรไฟล์');
+    }
+
+    function navigateTo(pageName) {
+      const filterGroup = document.getElementById('filterGroupContainer');
+      const searchBox = document.getElementById('searchBoxContainer');
+      const headerTitle = document.getElementById('headerTitle');
+
+      if (pageName === 'ค้นหา') {
+        filterGroup.style.display = 'flex';
+        searchBox.style.display = 'block';
+        headerTitle.textContent = 'พิกัดที่อ่านหนังสือวันนี้';
+        handleSearch();
+      } else if (pageName === 'บุ๊กมาร์ก') {
+        filterGroup.style.display = 'none';
+        searchBox.style.display = 'none';
+        headerTitle.textContent = 'ร้านที่บุ๊กมาร์กไว้ ⭐';
+        renderBookmarks();
+      } else if (pageName === 'แผนที่') {
+        window.open('https://www.google.com/maps/search/cafe+study+spot', '_blank');
+      } else if (pageName === 'โปรไฟล์') {
+        filterGroup.style.display = 'none';
+        searchBox.style.display = 'none';
+        headerTitle.textContent = 'โปรไฟล์ผู้ใช้ 👤';
+        renderProfile();
+      }
+    }
+
+    // Initial Load
+    renderPlaces(places);
+  </script>
+</body>
+</html>
