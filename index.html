@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="th">
 <head>
   <meta charset="UTF-8">
@@ -9,7 +8,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
     :root {
@@ -76,18 +78,20 @@
         );
 
       color: var(--text-main);
-
       overflow: hidden;
+
+      transition:
+        background 0.25s ease,
+        color 0.25s ease;
     }
 
     /* ========================================
-       APP CONTAINER
+       APP
     ======================================== */
 
     .app-container {
       width: 100%;
       max-width: 480px;
-
       height: 100dvh;
       min-height: 100dvh;
 
@@ -99,10 +103,9 @@
       flex-direction: column;
 
       position: relative;
-
       overflow: hidden;
 
-      box-shadow: none;
+      transition: background 0.25s ease;
     }
 
     @media (min-width: 600px) {
@@ -116,11 +119,9 @@
         min-height: 650px;
 
         border-radius: var(--radius-xl);
-
         border: 1px solid rgba(226, 232, 240, 0.9);
 
         box-shadow: var(--shadow-lg);
-
         overflow: hidden;
       }
     }
@@ -143,7 +144,12 @@
 
       z-index: 20;
 
-      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+      box-shadow:
+        0 2px 10px rgba(15, 23, 42, 0.03);
+
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
     }
 
     .user-profile {
@@ -157,20 +163,20 @@
     .greeting {
       font-size: 0.76rem;
       font-weight: 400;
-
       color: var(--text-muted);
-
       margin-bottom: 2px;
     }
 
     .username {
       font-size: 1.18rem;
       font-weight: 700;
-
       color: var(--text-main);
-
       line-height: 1.25;
     }
+
+    /* ========================================
+       SETTINGS AVATAR
+    ======================================== */
 
     .avatar {
       width: 43px;
@@ -186,7 +192,7 @@
       align-items: center;
       justify-content: center;
 
-      font-size: 0.88rem;
+      font-size: 1.05rem;
       font-weight: 700;
 
       color: white;
@@ -203,6 +209,7 @@
 
     .avatar:hover {
       transform: translateY(-2px);
+
       box-shadow:
         0 8px 20px rgba(245, 54, 92, 0.35);
     }
@@ -223,7 +230,11 @@
     .search-input {
       width: 100%;
 
-      padding: 12px 15px 12px 44px;
+      padding:
+        12px
+        15px
+        12px
+        44px;
 
       border-radius: var(--radius-md);
 
@@ -249,7 +260,6 @@
 
     .search-input:focus {
       border-color: var(--primary);
-
       background: white;
 
       box-shadow:
@@ -277,7 +287,6 @@
 
     .filter-group {
       display: flex;
-
       gap: 8px;
 
       overflow-x: auto;
@@ -301,7 +310,9 @@
     .filter-chip {
       flex-shrink: 0;
 
-      padding: 7px 13px;
+      padding:
+        7px
+        13px;
 
       border-radius: var(--radius-full);
 
@@ -330,7 +341,6 @@
     .filter-chip.active {
       background: var(--text-main);
       color: white;
-
       border-color: var(--text-main);
 
       box-shadow:
@@ -338,7 +348,7 @@
     }
 
     /* ========================================
-       CONTENT AREA
+       CONTENT
     ======================================== */
 
     .content-area {
@@ -362,7 +372,6 @@
 
       display: flex;
       flex-direction: column;
-
       gap: 16px;
 
       scroll-behavior: smooth;
@@ -372,7 +381,13 @@
       -webkit-overflow-scrolling: touch;
 
       scrollbar-width: thin;
-      scrollbar-color: #CBD5E1 transparent;
+
+      scrollbar-color:
+        #CBD5E1
+        transparent;
+
+      transition:
+        background 0.25s ease;
     }
 
     .content-area::-webkit-scrollbar {
@@ -386,10 +401,6 @@
     .content-area::-webkit-scrollbar-thumb {
       background: #CBD5E1;
       border-radius: 10px;
-    }
-
-    .content-area::-webkit-scrollbar-thumb:hover {
-      background: #94A3B8;
     }
 
     /* ========================================
@@ -409,18 +420,19 @@
 
       box-shadow: var(--shadow-sm);
 
-      border: 1px solid rgba(226, 232, 240, 0.75);
+      border:
+        1px solid rgba(226, 232, 240, 0.75);
 
       cursor: pointer;
 
       transition:
         transform 0.22s ease,
-        box-shadow 0.22s ease;
+        box-shadow 0.22s ease,
+        background 0.25s ease;
     }
 
     .place-card:hover {
       transform: translateY(-3px);
-
       box-shadow: var(--shadow-md);
     }
 
@@ -451,11 +463,23 @@
 
       object-fit: cover;
 
-      transition: transform 0.45s ease;
+      transition:
+        transform 0.45s ease;
+
+      opacity: 0;
+
+      animation:
+        imageFade 0.45s ease forwards;
     }
 
     .place-card:hover .place-img {
       transform: scale(1.035);
+    }
+
+    @keyframes imageFade {
+      to {
+        opacity: 1;
+      }
     }
 
     .bookmark-btn {
@@ -467,11 +491,13 @@
       width: 37px;
       height: 37px;
 
-      border: 1px solid rgba(255,255,255,0.7);
+      border:
+        1px solid rgba(255,255,255,0.7);
 
       border-radius: 50%;
 
-      background: rgba(255,255,255,0.92);
+      background:
+        rgba(255,255,255,0.92);
 
       backdrop-filter: blur(8px);
 
@@ -502,7 +528,7 @@
     }
 
     /* ========================================
-       META BAR
+       META
     ======================================== */
 
     .place-meta-bar {
@@ -513,11 +539,14 @@
 
       gap: 8px;
 
-      padding: 9px 13px;
+      padding:
+        9px
+        13px;
 
       background: #FAFBFC;
 
-      border-bottom: 1px solid #F1F5F9;
+      border-bottom:
+        1px solid #F1F5F9;
 
       color: var(--text-muted);
 
@@ -560,6 +589,7 @@
 
     .place-name {
       font-size: 1rem;
+
       font-weight: 700;
 
       line-height: 1.35;
@@ -571,15 +601,19 @@
       flex-shrink: 0;
 
       font-size: 0.7rem;
+
       font-weight: 600;
 
       color: var(--green);
 
       background: var(--green-bg);
 
-      border: 1px solid rgba(16,185,129,0.18);
+      border:
+        1px solid rgba(16,185,129,0.18);
 
-      padding: 4px 8px;
+      padding:
+        4px
+        8px;
 
       border-radius: var(--radius-full);
 
@@ -633,17 +667,21 @@
 
     .tag {
       font-size: 0.68rem;
+
       font-weight: 500;
 
       background: var(--tag-bg);
 
       color: var(--tag-text);
 
-      padding: 4px 7px;
+      padding:
+        4px
+        7px;
 
       border-radius: 6px;
 
-      border: 1px solid rgba(226,232,240,0.65);
+      border:
+        1px solid rgba(226,232,240,0.65);
     }
 
     /* ========================================
@@ -655,7 +693,8 @@
 
       inset: 0;
 
-      background: rgba(15, 23, 42, 0.62);
+      background:
+        rgba(15, 23, 42, 0.62);
 
       backdrop-filter: blur(5px);
 
@@ -666,7 +705,8 @@
 
       z-index: 100;
 
-      animation: fadeIn 0.2s ease;
+      animation:
+        fadeIn 0.2s ease;
     }
 
     @keyframes fadeIn {
@@ -707,20 +747,30 @@
         0 -15px 45px rgba(0,0,0,0.2);
 
       animation:
-        slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        slideUp 0.3s
+        cubic-bezier(0.16, 1, 0.3, 1);
 
       scrollbar-width: thin;
 
-      scrollbar-color: #CBD5E1 transparent;
+      scrollbar-color:
+        #CBD5E1
+        transparent;
     }
 
-    .modal-content::-webkit-scrollbar {
-      width: 5px;
-    }
+    .modal-content::before {
+      content: "";
+      display: block;
 
-    .modal-content::-webkit-scrollbar-thumb {
+      width: 42px;
+      height: 4px;
+
       background: #CBD5E1;
-      border-radius: 10px;
+
+      border-radius: 20px;
+
+      margin:
+        0 auto
+        12px;
     }
 
     @keyframes slideUp {
@@ -733,21 +783,6 @@
       }
     }
 
-    .modal-content::before {
-      content: ;
-
-      display: block;
-
-      width: 42px;
-      height: 4px;
-
-      background: #CBD5E1;
-
-      border-radius: 20px;
-
-      margin: 0 auto 12px;
-    }
-
     .modal-header {
       display: flex;
 
@@ -757,7 +792,6 @@
       gap: 10px;
 
       position: sticky;
-
       top: 0;
 
       background: white;
@@ -769,6 +803,7 @@
 
     .modal-title {
       font-size: 1.08rem;
+
       font-weight: 700;
 
       line-height: 1.35;
@@ -793,6 +828,7 @@
       cursor: pointer;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
     }
@@ -804,6 +840,7 @@
 
     .modal-body {
       display: flex;
+
       flex-direction: column;
 
       gap: 11px;
@@ -815,6 +852,7 @@
 
     .modal-img {
       width: 100%;
+
       height: 190px;
 
       object-fit: cover;
@@ -862,10 +900,13 @@
       text-decoration: none;
 
       font-size: 0.88rem;
+
       font-weight: 600;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       gap: 7px;
@@ -903,9 +944,11 @@
         8px
         max(7px, env(safe-area-inset-bottom));
 
-      background: rgba(255,255,255,0.97);
+      background:
+        rgba(255,255,255,0.97);
 
-      border-top: 1px solid #EDEFF3;
+      border-top:
+        1px solid #EDEFF3;
 
       display: flex;
 
@@ -916,6 +959,10 @@
 
       box-shadow:
         0 -4px 15px rgba(15,23,42,0.04);
+
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
     }
 
     .nav-item {
@@ -928,6 +975,7 @@
       border-radius: 13px;
 
       display: flex;
+
       flex-direction: column;
 
       align-items: center;
@@ -938,6 +986,7 @@
       color: var(--text-muted);
 
       font-size: 0.67rem;
+
       font-weight: 500;
 
       cursor: pointer;
@@ -955,11 +1004,13 @@
     .nav-item.active {
       color: var(--primary);
 
-      background: var(--primary-light);
+      background:
+        var(--primary-light);
     }
 
     .nav-item.active .nav-icon {
-      transform: translateY(-1px);
+      transform:
+        translateY(-1px);
     }
 
     .nav-icon {
@@ -972,10 +1023,10 @@
     }
 
     /* ========================================
-       PROFILE
+       SETTINGS
     ======================================== */
 
-    .profile-card {
+    .settings-card {
       flex-shrink: 0;
 
       background: white;
@@ -984,20 +1035,17 @@
 
       padding: 18px;
 
-      display: flex;
-      flex-direction: column;
-
-      gap: 13px;
-
       box-shadow: var(--shadow-sm);
 
-      border: 1px solid rgba(226,232,240,0.75);
+      border:
+        1px solid rgba(226,232,240,0.75);
     }
 
-    .profile-title {
+    .settings-title {
       color: var(--primary);
 
       font-size: 1.05rem;
+
       font-weight: 700;
 
       padding-bottom: 9px;
@@ -1006,14 +1054,221 @@
         2px solid var(--primary-light);
     }
 
+    .settings-description {
+      color: var(--text-muted);
+
+      font-size: 0.76rem;
+
+      line-height: 1.5;
+
+      margin:
+        10px 0;
+    }
+
+    .setting-item {
+      min-height: 62px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      padding:
+        10px 0;
+
+      border-bottom:
+        1px solid #F1F5F9;
+    }
+
+    .setting-item:last-of-type {
+      border-bottom: none;
+    }
+
+    .setting-info {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      min-width: 0;
+    }
+
+    .setting-icon {
+      width: 39px;
+      height: 39px;
+
+      flex-shrink: 0;
+
+      border-radius: 11px;
+
+      background:
+        var(--primary-light);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 1.05rem;
+    }
+
+    .setting-text {
+      min-width: 0;
+    }
+
+    .setting-name {
+      color: var(--text-main);
+
+      font-size: 0.82rem;
+
+      font-weight: 600;
+
+      line-height: 1.3;
+    }
+
+    .setting-description {
+      color: var(--text-muted);
+
+      font-size: 0.68rem;
+
+      line-height: 1.4;
+
+      margin-top: 2px;
+    }
+
     /* ========================================
-       EMPTY STATE
+       TOGGLE
+    ======================================== */
+
+    .toggle {
+      position: relative;
+
+      width: 45px;
+      height: 25px;
+
+      flex-shrink: 0;
+    }
+
+    .toggle input {
+      opacity: 0;
+
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+
+      inset: 0;
+
+      cursor: pointer;
+
+      background:
+        #CBD5E1;
+
+      border-radius: 999px;
+
+      transition:
+        0.25s ease;
+    }
+
+    .toggle-slider::before {
+      content: "";
+
+      position: absolute;
+
+      width: 19px;
+      height: 19px;
+
+      left: 3px;
+      top: 3px;
+
+      background: white;
+
+      border-radius: 50%;
+
+      box-shadow:
+        0 2px 5px rgba(0,0,0,0.15);
+
+      transition:
+        0.25s ease;
+    }
+
+    .toggle input:checked +
+    .toggle-slider {
+      background:
+        var(--primary);
+    }
+
+    .toggle input:checked +
+    .toggle-slider::before {
+      transform:
+        translateX(20px);
+    }
+
+    /* ========================================
+       DANGER BUTTON
+    ======================================== */
+
+    .settings-danger-btn {
+      width: 100%;
+
+      margin-top: 16px;
+
+      padding: 11px;
+
+      border:
+        1px solid #FECACA;
+
+      border-radius:
+        var(--radius-md);
+
+      background:
+        #FEF2F2;
+
+      color:
+        #DC2626;
+
+      font-family: inherit;
+
+      font-size: 0.8rem;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition:
+        0.2s ease;
+    }
+
+    .settings-danger-btn:hover {
+      background:
+        #FEE2E2;
+    }
+
+    .settings-version {
+      text-align: center;
+
+      color: var(--text-light);
+
+      font-size: 0.65rem;
+
+      margin-top: 16px;
+    }
+
+    /* ========================================
+       EMPTY
     ======================================== */
 
     .empty-state {
       min-height: 300px;
 
       display: flex;
+
       flex-direction: column;
 
       align-items: center;
@@ -1044,7 +1299,9 @@
       position: absolute;
 
       right: 18px;
-      bottom: calc(var(--nav-height) + 18px);
+
+      bottom:
+        calc(var(--nav-height) + 18px);
 
       width: 40px;
       height: 40px;
@@ -1053,7 +1310,8 @@
 
       border-radius: 50%;
 
-      background: rgba(30,41,59,0.92);
+      background:
+        rgba(30,41,59,0.92);
 
       color: white;
 
@@ -1077,7 +1335,8 @@
     }
 
     .back-to-top:hover {
-      transform: translateY(-2px);
+      transform:
+        translateY(-2px);
     }
 
     .back-to-top.show {
@@ -1085,19 +1344,154 @@
     }
 
     /* ========================================
-       LOADING EFFECT
+       DARK MODE
     ======================================== */
 
-    .place-img {
-      opacity: 0;
+    body.dark-mode {
+      --bg: #0F172A;
+      --card-bg: #111827;
 
-      animation: imageFade 0.45s ease forwards;
+      --text-main: #F8FAFC;
+      --text-muted: #CBD5E1;
+      --text-light: #94A3B8;
+
+      --border: #334155;
+
+      --tag-bg: #334155;
+      --tag-text: #CBD5E1;
+
+      --primary-light: #3B1621;
+
+      background:
+        #0F172A;
+
+      color:
+        #F8FAFC;
     }
 
-    @keyframes imageFade {
-      to {
-        opacity: 1;
-      }
+    body.dark-mode .app-container {
+      background:
+        #0F172A;
+    }
+
+    body.dark-mode .header {
+      background:
+        rgba(15, 23, 42, 0.97);
+
+      border-bottom-color:
+        #1E293B;
+    }
+
+    body.dark-mode .content-area {
+      background:
+        linear-gradient(
+          180deg,
+          #111827 0%,
+          #0F172A 100%
+        );
+    }
+
+    body.dark-mode .nav-bar {
+      background:
+        rgba(15,23,42,0.97);
+
+      border-top-color:
+        #1E293B;
+    }
+
+    body.dark-mode .place-card,
+    body.dark-mode .settings-card {
+      background:
+        #1E293B;
+
+      border-color:
+        #334155;
+    }
+
+    body.dark-mode .place-meta-bar {
+      background:
+        #172033;
+
+      border-bottom-color:
+        #334155;
+    }
+
+    body.dark-mode .place-highlight {
+      color:
+        #CBD5E1;
+    }
+
+    body.dark-mode .search-input {
+      background:
+        #1E293B;
+
+      color:
+        #F8FAFC;
+
+      border-color:
+        #334155;
+    }
+
+    body.dark-mode .search-input:focus {
+      background:
+        #1E293B;
+    }
+
+    body.dark-mode .filter-chip {
+      background:
+        #1E293B;
+
+      color:
+        #CBD5E1;
+
+      border-color:
+        #334155;
+    }
+
+    body.dark-mode .filter-chip.active {
+      background:
+        #F8FAFC;
+
+      color:
+        #0F172A;
+
+      border-color:
+        #F8FAFC;
+    }
+
+    body.dark-mode .setting-item {
+      border-bottom-color:
+        #334155;
+    }
+
+    body.dark-mode .modal-content,
+    body.dark-mode .modal-header {
+      background:
+        #1E293B;
+    }
+
+    body.dark-mode .close-btn {
+      background:
+        #334155;
+
+      color:
+        #CBD5E1;
+    }
+
+    body.dark-mode .tag {
+      background:
+        #334155;
+
+      border-color:
+        #475569;
+
+      color:
+        #CBD5E1;
+    }
+
+    body.dark-mode .nav-item:hover {
+      background:
+        #1E293B;
     }
 
     /* ========================================
@@ -1128,124 +1522,137 @@
       }
     }
   </style>
-
 </head>
 
 <body>
 
 <div class="app-container">
 
-  <!-- HEADER -->
+  <!-- ========================================
+       HEADER
+  ======================================== -->
 
   <header class="header">
 
-```
-<div class="user-profile">
+    <div class="user-profile">
 
-  <div>
-    <div class="greeting">
-      Welcome Student 👋
+      <div>
+
+        <div class="greeting">
+          Welcome Student 👋
+        </div>
+
+        <div
+          class="username"
+          id="headerTitle"
+        >
+          พิกัดที่อ่านหนังสือวันนี้
+        </div>
+
+      </div>
+
+      <!-- SETTINGS BUTTON -->
+
+      <div
+        class="avatar"
+        onclick="switchNavToSettings()"
+        title="ตั้งค่า"
+        aria-label="เปิดการตั้งค่า"
+      >
+        ⚙️
+      </div>
+
     </div>
 
-    <div class="username" id="headerTitle">
-      พิกัดที่อ่านหนังสือวันนี้
+
+    <!-- SEARCH -->
+
+    <div
+      class="search-box"
+      id="searchBoxContainer"
+    >
+
+      <span class="search-icon">
+        🔍
+      </span>
+
+      <input
+        type="text"
+        class="search-input"
+        id="searchInput"
+        placeholder="ค้นหาชื่อคาเฟ่ หรือทำเล..."
+        autocomplete="off"
+        oninput="handleSearch()"
+      >
+
     </div>
-  </div>
 
-  <div
-    class="avatar"
-    onclick="switchNavToProfile()"
-    title="โปรไฟล์"
-  >
-    ST
-  </div>
 
-</div>
+    <!-- FILTER -->
 
-<!-- SEARCH -->
-<div
-  class="search-box"
-  id="searchBoxContainer"
->
+    <div
+      class="filter-group"
+      id="filterGroupContainer"
+    >
 
-  <span class="search-icon">
-    🔍
-  </span>
+      <button
+        class="filter-chip active"
+        onclick="filterPlaces('all', this)"
+      >
+        ทั้งหมด
+      </button>
 
-  <input
-    type="text"
-    class="search-input"
-    id="searchInput"
-    placeholder="ค้นหาชื่อคาเฟ่ หรือทำเล..."
-    autocomplete="off"
-    oninput="handleSearch()"
-  >
+      <button
+        class="filter-chip"
+        onclick="filterPlaces('budget', this)"
+      >
+        🟢 งบไม่เกิน 60฿
+      </button>
 
-</div>
+      <button
+        class="filter-chip"
+        onclick="filterPlaces('24h', this)"
+      >
+        🌙 เปิด 24 ชั่วโมง
+      </button>
 
-<!-- FILTER -->
-<div
-  class="filter-group"
-  id="filterGroupContainer"
->
+      <button
+        class="filter-chip"
+        onclick="filterPlaces('plug', this)"
+      >
+        🔌 ปลั๊กเยอะ
+      </button>
 
-  <button
-    class="filter-chip active"
-    onclick="filterPlaces('all', this)"
-  >
-    ทั้งหมด
-  </button>
-
-  <button
-    class="filter-chip"
-    onclick="filterPlaces('budget', this)"
-  >
-    🟢 งบไม่เกิน 60฿
-  </button>
-
-  <button
-    class="filter-chip"
-    onclick="filterPlaces('24h', this)"
-  >
-    🌙 เปิด 24 ชั่วโมง
-  </button>
-
-  <button
-    class="filter-chip"
-    onclick="filterPlaces('plug', this)"
-  >
-    🔌 ปลั๊กเยอะ
-  </button>
-
-</div>
-```
+    </div>
 
   </header>
 
-  <!-- CONTENT -->
+
+  <!-- ========================================
+       CONTENT
+  ======================================== -->
 
   <main
     class="content-area"
     id="placeList"
   ></main>
 
+
   <!-- BACK TO TOP -->
 
-<button
-class="back-to-top"
-id="backToTop"
-onclick="scrollToTop()"
-aria-label="กลับขึ้นด้านบน"
-
->
-
-
-  ↑
-
-
+  <button
+    class="back-to-top"
+    id="backToTop"
+    onclick="scrollToTop()"
+    aria-label="กลับขึ้นด้านบน"
+  >
+    ↑
   </button>
 
-  <!-- MODAL -->
+
+  <!-- ========================================
+       MODAL
+  ======================================== -->
 
   <div
     class="modal-overlay"
@@ -1253,1101 +1660,1513 @@ aria-label="กลับขึ้นด้านบน"
     onclick="handleOverlayClick(event)"
   >
 
-```
-<div
-  class="modal-content"
-  id="modalContent"
->
-
-  <div class="modal-header">
-
     <div
-      class="modal-title"
-      id="modalName"
+      class="modal-content"
+      id="modalContent"
     >
-      ชื่อสถานที่
+
+      <div class="modal-header">
+
+        <div
+          class="modal-title"
+          id="modalName"
+        >
+          ชื่อสถานที่
+        </div>
+
+        <button
+          class="close-btn"
+          onclick="closeModal()"
+          aria-label="ปิด"
+        >
+          ✕
+        </button>
+
+      </div>
+
+      <div
+        class="modal-body"
+        id="modalBody"
+      ></div>
+
     </div>
 
-    <button
-      class="close-btn"
-      onclick="closeModal()"
-      aria-label="ปิด"
-    >
-      ✕
-    </button>
-
   </div>
 
-  <div
-    class="modal-body"
-    id="modalBody"
-  ></div>
 
-</div>
-```
-
-  </div>
-
-  <!-- NAVIGATION -->
+  <!-- ========================================
+       NAVIGATION
+  ======================================== -->
 
   <nav class="nav-bar">
 
-```
-<div
-  class="nav-item active"
-  id="navSearch"
-  onclick="switchNav(this, 'ค้นหา')"
->
-  <span class="nav-icon">🔍</span>
-  <span>ค้นหา</span>
-</div>
+    <div
+      class="nav-item active"
+      id="navSearch"
+      onclick="switchNav(this, 'ค้นหา')"
+    >
+      <span class="nav-icon">
+        🔍
+      </span>
 
-<div
-  class="nav-item"
-  id="navBookmark"
-  onclick="switchNav(this, 'บุ๊กมาร์ก')"
->
-  <span class="nav-icon">⭐</span>
-  <span>รายการโปรด</span>
-</div>
+      <span>
+        ค้นหา
+      </span>
+    </div>
 
-<div
-  class="nav-item"
-  id="navMap"
-  onclick="switchNav(this, 'แผนที่')"
->
-  <span class="nav-icon">📍</span>
-  <span>แผนที่</span>
-</div>
 
-<div
-  class="nav-item"
-  id="navProfile"
-  onclick="switchNav(this, 'โปรไฟล์')"
->
-  <span class="nav-icon">👤</span>
-  <span>โปรไฟล์</span>
-</div>
+    <div
+      class="nav-item"
+      id="navBookmark"
+      onclick="switchNav(this, 'บุ๊กมาร์ก')"
+    >
+      <span class="nav-icon">
+        ⭐
+      </span>
 
+      <span>
+        รายการโปรด
+      </span>
+    </div>
+
+
+    <div
+      class="nav-item"
+      id="navMap"
+      onclick="switchNav(this, 'แผนที่')"
+    >
+      <span class="nav-icon">
+        📍
+      </span>
+
+      <span>
+        แผนที่
+      </span>
+    </div>
+
+
+    <!-- SETTINGS -->
+
+    <div
+      class="nav-item"
+      id="navSettings"
+      onclick="switchNav(this, 'ตั้งค่า')"
+    >
+      <span class="nav-icon">
+        ⚙️
+      </span>
+
+      <span>
+        ตั้งค่า
+      </span>
+    </div>
 
   </nav>
 
 </div>
 
+
 <script>
 
-  /* =========================================
-     DATA
-  ========================================= */
-
-  const places = [
-    {
-      id: 1,
-      name: "Ruma Cafe & Co-Working Space",
-      price: "เริ่มต้น 45฿",
-      detail: "ถนนบรมไตรโลกนารถ (โครงการต้นเงินพลาซ่า)",
-      highlight: "คาเฟ่บรรยากาศโปร่ง มีโซนเงียบสงบสำหรับอ่านหนังสือสอบ ปลั๊กไฟเข้าถึงได้เกือบทุกโต๊ะ",
-      hours: "เปิด 24 ชั่วโมง",
-      phone: "092-348-8805",
-      parking: "มีที่จอดรถยนต์และจักรยานยนต์",
-      recommendedMenu: "Matcha Latte (55฿), Croissant (45฿)",
-      distanceKm: 1.2,
-      travelTimeMin: 4,
-      image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=700&q=85",
-      tags: ["🌙 เปิด 24h", "🔌 ปลั๊กทุกโต๊ะ", "📶 Wi-Fi แรง"],
-      categories: ["24h", "plug"],
-      lat: 16.8118,
-      lng: 100.2608,
-      mapUrl: "https://maps.google.com/?cid=15162077634708377289"
-    },
-
-    {
-      id: 2,
-      name: "tham.coffee workspace",
-      price: "เริ่มต้น 50฿",
-      detail: "ชั้น 2 ไทยมาร์ท (ฝั่งท็อปส์มาร์เก็ต)",
-      highlight: "ดีไซน์สไตล์มินิมอล มีโซน Quiet Zone เงียบสงบ เหมาะกับการนั่งทำงานใช้ความคิดสูง",
-      hours: "08:00 - 20:00 น.",
-      phone: "089-876-5432",
-      parking: "จอดรถในลานจอดไทยมาร์ทฟรี",
-      recommendedMenu: "Dirty Coffee (65฿), Drip Coffee (80฿)",
-      distanceKm: 2.5,
-      travelTimeMin: 7,
-      image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=700&q=85",
-      tags: ["🔇 Quiet Zone", "🔌 ปลั๊กเยอะ", "🟢 งบประหยัด"],
-      categories: ["budget", "plug"],
-      lat: 16.8150,
-      lng: 100.2580,
-      mapUrl: "https://www.google.com/maps/search/?api=1&query=tham.coffee+workspace+พิษณุโลก"
-    },
-
-    {
-      id: 3,
-      name: "MINDMOST COFFEE",
-      price: "เริ่มต้น 55฿",
-      detail: "ถนนสนามบิน (ตรงข้ามโรงเรียนพุทธชินราช)",
-      highlight: "คาเฟ่โทนอุ่น แอร์เย็นสบาย บริการเป็นกันเอง ขนมเบเกอรี่อบใหม่สดใหม่ทุกวัน",
-      hours: "08:00 - 17:00 น.",
-      phone: "066-156-5916",
-      parking: "จอดรถริมถนนหน้าร้าน",
-      recommendedMenu: "Americano Orange (60฿), Banoffee Pie (65฿)",
-      distanceKm: 0.8,
-      travelTimeMin: 3,
-      image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=700&q=85",
-      tags: ["🟢 งบประหยัด", "❄️ แอร์เย็น", "🍰 มีขนม"],
-      categories: ["budget"],
-      lat: 16.8080,
-      lng: 100.2685,
-      mapUrl: "https://maps.google.com/?cid=2265326802321421800"
-    },
-
-    {
-      id: 4,
-      name: "Jadeology Specialty Coffee",
-      price: "เริ่มต้น 65฿",
-      detail: "ซอยทิพย์เสนา (หลังธนาคารกรุงเทพ)",
-      highlight: "ร้านกาแฟสำหรับคนรักเมล็ดคั่วพิเศษ บรรยากาศเงียบสงบ เหมาะกับการอ่านหนังสือแบบชิลๆ",
-      hours: "07:30 - 16:00 น.",
-      phone: "096-358-2829",
-      parking: "มีลานจอดรถข้างร้าน",
-      recommendedMenu: "Specialty Cold Brew (75฿), Lemon Tart (70฿)",
-      distanceKm: 1.8,
-      travelTimeMin: 5,
-      image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=85",
-      tags: ["☕ กาแฟดี", "🔌 มีปลั๊กบางจุด", "🌿 บรรยากาศชิล"],
-      categories: [],
-      lat: 16.8209,
-      lng: 100.2635,
-      mapUrl: "https://maps.google.com/?cid=1767912189282574651"
-    },
-
-    {
-      id: 5,
-      name: "24/7 Study Lounge & Cafe",
-      price: "เริ่มต้น 40฿",
-      detail: "หน้ามหาวิทยาลัย (ฝั่งประตู 1)",
-      highlight: "เลานจ์อ่านหนังสือสำหรับนักศึกษาโดยเฉพาะ ราคาประหยัด มีโซนที่นั่งเดี่ยวและโต๊ะกลุ่ม",
-      hours: "เปิด 24 ชั่วโมง",
-      phone: "061-111-2222",
-      parking: "จอดจักรยานยนต์หน้าร้าน",
-      recommendedMenu: "Thai Milk Tea (40฿), Toast with Butter (35฿)",
-      distanceKm: 0.5,
-      travelTimeMin: 2,
-      image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=700&q=85",
-      tags: ["🌙 เปิด 24h", "🔌 ปลั๊กเยอะ", "🟢 งบประหยัด"],
-      categories: ["24h", "budget", "plug"],
-      lat: 16.8280,
-      lng: 100.2620,
-      mapUrl: "https://www.google.com/maps/search/?api=1&query=24/7+Study+Lounge+Cafe+พิษณุโลก"
-    },
-
-    {
-      id: 6,
-      name: "The Library Crafts & Coffee",
-      price: "เริ่มต้น 50฿",
-      detail: "ข้างห้องสมุดประชาชนจังหวัด",
-      highlight: "คาเฟ่ธีมห้องสมุด มีหนังสือให้อ่านฟรี โทนร้านเงียบสงบ งดใช้เสียงดัง เหมาะกับการอ่านสอบ",
-      hours: "09:00 - 19:00 น.",
-      phone: "086-555-4433",
-      parking: "จอดรถในพื้นที่ห้องสมุดประชาชน",
-      recommendedMenu: "Cocoa Intense (50฿), Waffle (45฿)",
-      distanceKm: 1.5,
-      travelTimeMin: 5,
-      image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=700&q=85",
-      tags: ["🔇 Quiet Zone", "🟢 งบประหยัด", "📶 Wi-Fi แรง"],
-      categories: ["budget"],
-      lat: 16.8190,
-      lng: 100.2670,
-      mapUrl: "https://www.google.com/maps/search/?api=1&query=The+Library+Crafts+Coffee+พิษณุโลก"
-    },
-
-    {
-      id: 7,
-      name: "Owl Night Hub Cafe",
-      price: "เริ่มต้น 60฿",
-      detail: "ซอยหลังมหาลัย (ตรงข้ามหอพักรับโชค)",
-      highlight: "ฮับของคนนอนดึก มีอาหารจานเดียวทานง่าย และเครื่องดื่มชูกำลังให้บริการตลอดคืน",
-      hours: "เปิด 24 ชั่วโมง",
-      phone: "084-333-2211",
-      parking: "มีลานจอดกว้างขวาง",
-      recommendedMenu: "Espresso Double Shot (60฿), ข้าวผัดกะเพรา (59฿)",
-      distanceKm: 0.9,
-      travelTimeMin: 3,
-      image: "https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=700&q=85",
-      tags: ["🌙 เปิด 24h", "🔌 ปลั๊กทุกโต๊ะ", "🍕 มีอาหาร"],
-      categories: ["24h", "budget", "plug"],
-      lat: 16.8330,
-      lng: 100.2590,
-      mapUrl: "https://www.google.com/maps/search/?api=1&query=Owl+Night+Hub+Cafe+พิษณุโลก"
-    },
-
-    {
-      id: 8,
-      name: "Plug-In Co-Working Space",
-      price: "เริ่มต้น 55฿",
-      detail: "ถนนมิตรภาพ (ใกล้แยกโคกคีรี)",
-      highlight: "เน้นสายทำงานออนไลน์และติวกลุ่ม มีบริการเครื่องปริ้นเอกสาร และห้องประชุมเช่ารายชั่วโมง",
-      hours: "08:00 - 22:00 น.",
-      phone: "055-987-654",
-      parking: "มีที่จอดรถข้างอาคาร",
-      recommendedMenu: "Latte Cold (55฿), Sandwich Ham Cheese (49฿)",
-      distanceKm: 2.1,
-      travelTimeMin: 6,
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=85",
-      tags: ["🔌 ปลั๊กเยอะ", "🟢 งบประหยัด", "🖨️ มีบริการปริ้นท์"],
-      categories: ["budget", "plug"],
-      lat: 16.8120,
-      lng: 100.2740,
-      mapUrl: "https://www.google.com/maps/search/?api=1&query=Plug-In+Co-Working+Space+พิษณุโลก"
-    },
-
-    {
-      id: 9,
-      name: "Space Cafe & Slow Bar",
-      price: "เริ่มต้น 60฿",
-      detail: "ใกล้หอนาฬิกาเมืองพิษณุโลก",
-      highlight: "สโลว์บาร์บรรยากาศสบายๆ เพลงเบาๆ ไม่รบกวนสมาธิ เหมาะกับการอ่านหนังสือจิบกาแฟชิลๆ",
-      hours: "07:00 - 17:00 น.",
-      phone: "083-777-1122",
-      parking: "จอดรถบริเวณรอบหอนาฬิกา",
-      recommendedMenu: "Syphon Coffee (70฿), Matcha Cake (65฿)",
-      distanceKm: 1.1,
-      travelTimeMin: 4,
-      image: "https://images.unsplash.com/photo-1508766917616-d22f3f1eea14?auto=format&fit=crop&w=700&q=85",
-      tags: ["☕ กาแฟดี", "🔌 มีปลั๊กบางจุด", "🟢 งบประหยัด"],
-      categories: ["budget"],
-      lat: 16.8230,
-      lng: 100.2630,
-      mapUrl: "https://www.google.com/maps/search/?api=1&query=Space+Cafe+Slow+Bar+พิษณุโลก"
-    },
-
-    {
-      id: 10,
-      name: "Jaisu cafe (ใจสู้คาเฟ่)",
-      price: "เริ่มต้น 45฿",
-      detail: "โครงการ NU Plaza (ใกล้มหาวิทยาลัยนเรศวร)",
-      highlight: "คาเฟ่ขวัญใจสายอ่านหนังสือดึก มินิมอล ชิลๆ มีแอร์เย็นสบายและบริการเครื่องปริ้นท์เอกสาร",
-      hours: "11:00 - 22:00 น.",
-      phone: "064-356-7713",
-      parking: "มีที่จอดรถในโครงการ NU Plaza",
-      recommendedMenu: "Iced Cocoa (50฿), Brownie (40฿)",
-      distanceKm: 8.5,
-      travelTimeMin: 12,
-      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=700&q=85",
-      tags: ["🟢 งบประหยัด", "🖨️ มีบริการปริ้นท์", "🔌 ปลั๊กเยอะ"],
-      categories: ["budget", "plug"],
-      lat: 16.7460,
-      lng: 100.1965,
-      mapUrl: "https://maps.google.com/?cid=7760782636731018928"
-    },
-
-    {
-      id: 11,
-      name: "เสียงทิพย์บุ๊คเซ็นเตอร์ & คาเฟ่",
-      price: "เริ่มต้น 40฿",
-      detail: "ถนนเอกาทศรฐ (ใกล้สถานีรถไฟพิษณุโลก)",
-      highlight: "ร้านหนังสือในตำนานที่มีโซนคาเฟ่ในตัว บรรยากาศเงียบสงบคลาสสิก นั่งอ่านหนังสือได้เพลินๆ",
-      hours: "07:00 - 20:00 น.",
-      phone: "055-258-862",
-      parking: "จอดรถหน้าร้านและริมถนน",
-      recommendedMenu: "โกโก้เย็น (45฿), กาแฟโบราณ (40฿)",
-      distanceKm: 6.6,
-      travelTimeMin: 10,
-      image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=700&q=85",
-      tags: ["🔇 Quiet Zone", "📚 ร้านหนังสือ", "🟢 งบประหยัด"],
-      categories: ["budget"],
-      lat: 16.8188,
-      lng: 100.2651,
-      mapUrl: "https://maps.google.com/?cid=13740366924599960121"
-    },
-
-    {
-      id: 12,
-      name: "Bakerneering",
-      price: "เริ่มต้น 55฿",
-      detail: "ระหว่างประตู 4 และประตู 5 มหาวิทยาลัยนเรศวร",
-      highlight: "ขึ้นชื่อเรื่องกาแฟคุณภาพดีและขนมเบเกอรี่โฮมเมด บรรยากาศอบอุ่นเหมาะสำหรับนั่งทำงานและอ่านหนังสือ",
-      hours: "07:30 - 22:00 น.",
-      phone: "093-581-1537",
-      parking: "มีที่จอดรถหน้าร้าน",
-      recommendedMenu: "Matcha Latte (65฿), Croissant (50฿)",
-      distanceKm: 9.1,
-      travelTimeMin: 13,
-      image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=85",
-      tags: ["☕ กาแฟดี", "🍰 เบเกอรี่อร่อย", "🔌 มีปลั๊กไฟ"],
-      categories: ["plug"],
-      lat: 16.7431,
-      lng: 100.1932,
-      mapUrl: "https://maps.google.com/?cid=6341936633933864893"
-    },
-
-    {
-      id: 13,
-      name: "Churn Cafe Phitsanulok (เชิญคาเฟ่)",
-      price: "เริ่มต้น 60฿",
-      detail: "ซอยเอกาทศรถ (ในตัวเมืองพิษณุโลก)",
-      highlight: "คาเฟ่สไตล์วินเทจโปร่งสบาย มีเมนูอาหารทานเล่นและเครื่องดื่มหลากหลาย นั่งอ่านหนังสือชิลๆ ได้ยาวๆ",
-      hours: "08:00 - 17:00 น.",
-      phone: "062-439-9775",
-      parking: "จอดรถบริเวณใกล้เคียงร้าน",
-      recommendedMenu: "Chicken Truffle Burger (120฿), Iced Latte (65฿)",
-      distanceKm: 6.5,
-      travelTimeMin: 9,
-      image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=700&q=85",
-      tags: ["🌿 บรรยากาศชิล", "🍕 มีอาหาร", "☕ เครื่องดื่มดี"],
-      categories: [],
-      lat: 16.8201,
-      lng: 100.2644,
-      mapUrl: "https://maps.google.com/?cid=15701927147390177972"
-    },
-
-    {
-      id: 14,
-      name: "Tasteture",
-      price: "เริ่มต้น 55฿",
-      detail: "ถนนศรีธรรมไตรปิฎก (ใกล้โรงพยาบาลพุทธชินราช)",
-      highlight: "สไตล์มินิมอลลอฟท์ กาแฟคั่วเองคุณภาพสูง มีมุมนั่งเงียบๆ พร้อมเพลงบรรเลงสบายๆ ช่วยสร้างสมาธิ",
-      hours: "08:00 - 17:00 น.",
-      phone: "097-281-8643",
-      parking: "จอดรถริมถนนหน้าร้าน",
-      recommendedMenu: "Matcha Cold Whisk (70฿), Espresso (55฿)",
-      distanceKm: 6.7,
-      travelTimeMin: 10,
-      image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=700&q=85",
-      tags: ["☕ Speciality Coffee", "🔇 เงียบสงบ", "🟢 งบประหยัด"],
-      categories: ["budget"],
-      lat: 16.8123,
-      lng: 100.2662,
-      mapUrl: "https://maps.google.com/?cid=3701755522932382793"
-    }
-  ];
-
-
-  /* =========================================
-     USER
-  ========================================= */
-
-  const userInfo = {
-    name: "นักเรียน/นักศึกษา",
-    studentId: "65xxxxxx",
-    location: "ตำบลพลายชุมพล อำเภอเมืองพิษณุโลก จังหวัดพิษณุโลก",
-    lat: 16.8310,
-    lng: 100.2610
-  };
-
-
-  let bookmarkedIds = [];
-  let currentTab = 'ค้นหา';
-  let currentCategory = 'all';
-
-
-  /* =========================================
-     RENDER PLACES
-  ========================================= */
-
-  function renderPlaces(data) {
-
-    const container =
-      document.getElementById('placeList');
-
-    container.innerHTML = '';
-
-    if (data.length === 0) {
-
-      container.innerHTML = `
-        <div class="empty-state">
-
-          <span class="empty-state-icon">
-            🔍
-          </span>
-
-          <p>
-            ไม่พบสถานที่ที่คุณกำลังค้นหา
-          </p>
-
-        </div>
-      `;
-
-      return;
-    }
-
-
-    data.forEach(place => {
-
-      const card =
-        document.createElement('div');
-
-      card.className = 'place-card';
-
-
-      const isBookmarked =
-        bookmarkedIds.includes(place.id);
-
-
-      card.innerHTML = `
-
-        <div class="place-img-container">
-
-          <button
-            class="bookmark-btn ${isBookmarked ? 'active-bm' : ''}"
-            onclick="toggleBookmark(event, ${place.id})"
-            aria-label="บันทึก ${place.name}"
-          >
-            ${isBookmarked ? '❤️' : '🤍'}
-          </button>
-
-          <img
-            src="${place.image}"
-            alt="${place.name}"
-            class="place-img"
-            loading="lazy"
-            onclick="openDetailModal(${place.id})"
-          >
-
-        </div>
-
-
-        <div
-          class="place-meta-bar"
-          onclick="openDetailModal(${place.id})"
-        >
-
-          <div class="meta-item">
-            <span>🕒</span>
-            <span>${place.hours}</span>
-          </div>
-
-          <div class="meta-item">
-            <span>📍</span>
-            <span>
-              ${place.distanceKm} กม.
-              (${place.travelTimeMin} นาที)
-            </span>
-          </div>
-
-        </div>
-
-
-        <div
-          class="place-info"
-          onclick="openDetailModal(${place.id})"
-        >
-
-          <div class="place-title-row">
-
-            <div class="place-name">
-              ${place.name}
-            </div>
-
-            <div class="place-price">
-              ${place.price}
-            </div>
-
-          </div>
-
-
-          <div class="place-location">
-            📍 ${place.detail}
-          </div>
-
-
-          <div class="place-highlight">
-            ${place.highlight}
-          </div>
-
-
-          <div class="feature-tags">
-
-            ${place.tags
-              .map(tag =>
-                `<span class="tag">${tag}</span>`
-              )
-              .join('')
-            }
-
-          </div>
-
-        </div>
-
-      `;
-
-      container.appendChild(card);
-
-    });
+/* =========================================
+   DATA
+========================================= */
+
+const places = [
+
+  {
+    id: 1,
+    name: "Ruma Cafe & Co-Working Space",
+    price: "เริ่มต้น 45฿",
+    detail: "ถนนบรมไตรโลกนารถ (โครงการต้นเงินพลาซ่า)",
+    highlight: "คาเฟ่บรรยากาศโปร่ง มีโซนเงียบสงบสำหรับอ่านหนังสือสอบ ปลั๊กไฟเข้าถึงได้เกือบทุกโต๊ะ",
+    hours: "เปิด 24 ชั่วโมง",
+    phone: "092-348-8805",
+    parking: "มีที่จอดรถยนต์และจักรยานยนต์",
+    recommendedMenu: "Matcha Latte (55฿), Croissant (45฿)",
+    distanceKm: 1.2,
+    travelTimeMin: 4,
+    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=700&q=85",
+    tags: ["🌙 เปิด 24h", "🔌 ปลั๊กทุกโต๊ะ", "📶 Wi-Fi แรง"],
+    categories: ["24h", "plug"],
+    mapUrl: "https://maps.google.com/?cid=15162077634708377289"
+  },
+
+  {
+    id: 2,
+    name: "tham.coffee workspace",
+    price: "เริ่มต้น 50฿",
+    detail: "ชั้น 2 ไทยมาร์ท (ฝั่งท็อปส์มาร์เก็ต)",
+    highlight: "ดีไซน์สไตล์มินิมอล มีโซน Quiet Zone เงียบสงบ เหมาะกับการนั่งทำงานใช้ความคิดสูง",
+    hours: "08:00 - 20:00 น.",
+    phone: "089-876-5432",
+    parking: "จอดรถในลานจอดไทยมาร์ทฟรี",
+    recommendedMenu: "Dirty Coffee (65฿), Drip Coffee (80฿)",
+    distanceKm: 2.5,
+    travelTimeMin: 7,
+    image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=700&q=85",
+    tags: ["🔇 Quiet Zone", "🔌 ปลั๊กเยอะ", "🟢 งบประหยัด"],
+    categories: ["budget", "plug"],
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=tham.coffee+workspace+พิษณุโลก"
+  },
+
+  {
+    id: 3,
+    name: "MINDMOST COFFEE",
+    price: "เริ่มต้น 55฿",
+    detail: "ถนนสนามบิน (ตรงข้ามโรงเรียนพุทธชินราช)",
+    highlight: "คาเฟ่โทนอุ่น แอร์เย็นสบาย บริการเป็นกันเอง ขนมเบเกอรี่อบใหม่สดใหม่ทุกวัน",
+    hours: "08:00 - 17:00 น.",
+    phone: "066-156-5916",
+    parking: "จอดรถริมถนนหน้าร้าน",
+    recommendedMenu: "Americano Orange (60฿), Banoffee Pie (65฿)",
+    distanceKm: 0.8,
+    travelTimeMin: 3,
+    image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=700&q=85",
+    tags: ["🟢 งบประหยัด", "❄️ แอร์เย็น", "🍰 มีขนม"],
+    categories: ["budget"],
+    mapUrl: "https://maps.google.com/?cid=2265326802321421800"
+  },
+
+  {
+    id: 4,
+    name: "Jadeology Specialty Coffee",
+    price: "เริ่มต้น 65฿",
+    detail: "ซอยทิพย์เสนา (หลังธนาคารกรุงเทพ)",
+    highlight: "ร้านกาแฟสำหรับคนรักเมล็ดคั่วพิเศษ บรรยากาศเงียบสงบ เหมาะกับการอ่านหนังสือแบบชิลๆ",
+    hours: "07:30 - 16:00 น.",
+    phone: "096-358-2829",
+    parking: "มีลานจอดรถข้างร้าน",
+    recommendedMenu: "Specialty Cold Brew (75฿), Lemon Tart (70฿)",
+    distanceKm: 1.8,
+    travelTimeMin: 5,
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=85",
+    tags: ["☕ กาแฟดี", "🔌 มีปลั๊กบางจุด", "🌿 บรรยากาศชิล"],
+    categories: [],
+    mapUrl: "https://maps.google.com/?cid=1767912189282574651"
+  },
+
+  {
+    id: 5,
+    name: "24/7 Study Lounge & Cafe",
+    price: "เริ่มต้น 40฿",
+    detail: "หน้ามหาวิทยาลัย (ฝั่งประตู 1)",
+    highlight: "เลานจ์อ่านหนังสือสำหรับนักศึกษาโดยเฉพาะ ราคาประหยัด มีโซนที่นั่งเดี่ยวและโต๊ะกลุ่ม",
+    hours: "เปิด 24 ชั่วโมง",
+    phone: "061-111-2222",
+    parking: "จอดจักรยานยนต์หน้าร้าน",
+    recommendedMenu: "Thai Milk Tea (40฿), Toast with Butter (35฿)",
+    distanceKm: 0.5,
+    travelTimeMin: 2,
+    image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=700&q=85",
+    tags: ["🌙 เปิด 24h", "🔌 ปลั๊กเยอะ", "🟢 งบประหยัด"],
+    categories: ["24h", "budget", "plug"],
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=24/7+Study+Lounge+Cafe+พิษณุโลก"
+  },
+
+  {
+    id: 6,
+    name: "The Library Crafts & Coffee",
+    price: "เริ่มต้น 50฿",
+    detail: "ข้างห้องสมุดประชาชนจังหวัด",
+    highlight: "คาเฟ่ธีมห้องสมุด มีหนังสือให้อ่านฟรี โทนร้านเงียบสงบ งดใช้เสียงดัง เหมาะกับการอ่านสอบ",
+    hours: "09:00 - 19:00 น.",
+    phone: "086-555-4433",
+    parking: "จอดรถในพื้นที่ห้องสมุดประชาชน",
+    recommendedMenu: "Cocoa Intense (50฿), Waffle (45฿)",
+    distanceKm: 1.5,
+    travelTimeMin: 5,
+    image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=700&q=85",
+    tags: ["🔇 Quiet Zone", "🟢 งบประหยัด", "📶 Wi-Fi แรง"],
+    categories: ["budget"],
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=The+Library+Crafts+Coffee+พิษณุโลก"
+  },
+
+  {
+    id: 7,
+    name: "Owl Night Hub Cafe",
+    price: "เริ่มต้น 60฿",
+    detail: "ซอยหลังมหาลัย (ตรงข้ามหอพักรับโชค)",
+    highlight: "ฮับของคนนอนดึก มีอาหารจานเดียวทานง่าย และเครื่องดื่มให้บริการตลอดคืน",
+    hours: "เปิด 24 ชั่วโมง",
+    phone: "084-333-2211",
+    parking: "มีลานจอดกว้างขวาง",
+    recommendedMenu: "Espresso Double Shot (60฿), ข้าวผัดกะเพรา (59฿)",
+    distanceKm: 0.9,
+    travelTimeMin: 3,
+    image: "https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=700&q=85",
+    tags: ["🌙 เปิด 24h", "🔌 ปลั๊กทุกโต๊ะ", "🍕 มีอาหาร"],
+    categories: ["24h", "budget", "plug"],
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Owl+Night+Hub+Cafe+พิษณุโลก"
+  },
+
+  {
+    id: 8,
+    name: "Plug-In Co-Working Space",
+    price: "เริ่มต้น 55฿",
+    detail: "ถนนมิตรภาพ (ใกล้แยกโคกคีรี)",
+    highlight: "เน้นสายทำงานออนไลน์และติวกลุ่ม มีบริการเครื่องปริ้นเอกสาร และห้องประชุมเช่ารายชั่วโมง",
+    hours: "08:00 - 22:00 น.",
+    phone: "055-987-654",
+    parking: "มีที่จอดรถข้างอาคาร",
+    recommendedMenu: "Latte Cold (55฿), Sandwich Ham Cheese (49฿)",
+    distanceKm: 2.1,
+    travelTimeMin: 6,
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=85",
+    tags: ["🔌 ปลั๊กเยอะ", "🟢 งบประหยัด", "🖨️ มีบริการปริ้นท์"],
+    categories: ["budget", "plug"],
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Plug-In+Co-Working+Space+พิษณุโลก"
+  },
+
+  {
+    id: 9,
+    name: "Space Cafe & Slow Bar",
+    price: "เริ่มต้น 60฿",
+    detail: "ใกล้หอนาฬิกาเมืองพิษณุโลก",
+    highlight: "สโลว์บาร์บรรยากาศสบายๆ เพลงเบาๆ ไม่รบกวนสมาธิ เหมาะกับการอ่านหนังสือจิบกาแฟชิลๆ",
+    hours: "07:00 - 17:00 น.",
+    phone: "083-777-1122",
+    parking: "จอดรถบริเวณรอบหอนาฬิกา",
+    recommendedMenu: "Syphon Coffee (70฿), Matcha Cake (65฿)",
+    distanceKm: 1.1,
+    travelTimeMin: 4,
+    image: "https://images.unsplash.com/photo-1508766917616-d22f3f1eea14?auto=format&fit=crop&w=700&q=85",
+    tags: ["☕ กาแฟดี", "🔌 มีปลั๊กบางจุด", "🟢 งบประหยัด"],
+    categories: ["budget"],
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Space+Cafe+Slow+Bar+พิษณุโลก"
+  },
+
+  {
+    id: 10,
+    name: "Jaisu cafe (ใจสู้คาเฟ่)",
+    price: "เริ่มต้น 45฿",
+    detail: "โครงการ NU Plaza (ใกล้มหาวิทยาลัยนเรศวร)",
+    highlight: "คาเฟ่ขวัญใจสายอ่านหนังสือดึก มินิมอล ชิลๆ มีแอร์เย็นสบายและบริการเครื่องปริ้นท์เอกสาร",
+    hours: "11:00 - 22:00 น.",
+    phone: "064-356-7713",
+    parking: "มีที่จอดรถในโครงการ NU Plaza",
+    recommendedMenu: "Iced Cocoa (50฿), Brownie (40฿)",
+    distanceKm: 8.5,
+    travelTimeMin: 12,
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=700&q=85",
+    tags: ["🟢 งบประหยัด", "🖨️ มีบริการปริ้นท์", "🔌 ปลั๊กเยอะ"],
+    categories: ["budget", "plug"],
+    mapUrl: "https://maps.google.com/?cid=7760782636731018928"
+  },
+
+  {
+    id: 11,
+    name: "เสียงทิพย์บุ๊คเซ็นเตอร์ & คาเฟ่",
+    price: "เริ่มต้น 40฿",
+    detail: "ถนนเอกาทศรฐ (ใกล้สถานีรถไฟพิษณุโลก)",
+    highlight: "ร้านหนังสือในตำนานที่มีโซนคาเฟ่ในตัว บรรยากาศเงียบสงบคลาสสิก นั่งอ่านหนังสือได้เพลินๆ",
+    hours: "07:00 - 20:00 น.",
+    phone: "055-258-862",
+    parking: "จอดรถหน้าร้านและริมถนน",
+    recommendedMenu: "โกโก้เย็น (45฿), กาแฟโบราณ (40฿)",
+    distanceKm: 6.6,
+    travelTimeMin: 10,
+    image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=700&q=85",
+    tags: ["🔇 Quiet Zone", "📚 ร้านหนังสือ", "🟢 งบประหยัด"],
+    categories: ["budget"],
+    mapUrl: "https://maps.google.com/?cid=13740366924599960121"
+  },
+
+  {
+    id: 12,
+    name: "Bakerneering",
+    price: "เริ่มต้น 55฿",
+    detail: "ระหว่างประตู 4 และประตู 5 มหาวิทยาลัยนเรศวร",
+    highlight: "ขึ้นชื่อเรื่องกาแฟคุณภาพดีและขนมเบเกอรี่โฮมเมด บรรยากาศอบอุ่นเหมาะสำหรับนั่งทำงานและอ่านหนังสือ",
+    hours: "07:30 - 22:00 น.",
+    phone: "093-581-1537",
+    parking: "มีที่จอดรถหน้าร้าน",
+    recommendedMenu: "Matcha Latte (65฿), Croissant (50฿)",
+    distanceKm: 9.1,
+    travelTimeMin: 13,
+    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=85",
+    tags: ["☕ กาแฟดี", "🍰 เบเกอรี่อร่อย", "🔌 มีปลั๊กไฟ"],
+    categories: ["plug"],
+    mapUrl: "https://maps.google.com/?cid=6341936633933864893"
+  },
+
+  {
+    id: 13,
+    name: "Churn Cafe Phitsanulok (เชิญคาเฟ่)",
+    price: "เริ่มต้น 60฿",
+    detail: "ซอยเอกาทศรถ (ในตัวเมืองพิษณุโลก)",
+    highlight: "คาเฟ่สไตล์วินเทจโปร่งสบาย มีเมนูอาหารทานเล่นและเครื่องดื่มหลากหลาย นั่งอ่านหนังสือชิลๆ ได้ยาวๆ",
+    hours: "08:00 - 17:00 น.",
+    phone: "062-439-9775",
+    parking: "จอดรถบริเวณใกล้เคียงร้าน",
+    recommendedMenu: "Chicken Truffle Burger (120฿), Iced Latte (65฿)",
+    distanceKm: 6.5,
+    travelTimeMin: 9,
+    image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=700&q=85",
+    tags: ["🌿 บรรยากาศชิล", "🍕 มีอาหาร", "☕ เครื่องดื่มดี"],
+    categories: [],
+    mapUrl: "https://maps.google.com/?cid=15701927147390177972"
+  },
+
+  {
+    id: 14,
+    name: "Tasteture",
+    price: "เริ่มต้น 55฿",
+    detail: "ถนนศรีธรรมไตรปิฎก (ใกล้โรงพยาบาลพุทธชินราช)",
+    highlight: "สไตล์มินิมอลลอฟท์ กาแฟคั่วเองคุณภาพสูง มีมุมนั่งเงียบๆ พร้อมเพลงบรรเลงสบายๆ ช่วยสร้างสมาธิ",
+    hours: "08:00 - 17:00 น.",
+    phone: "097-281-8643",
+    parking: "จอดรถริมถนนหน้าร้าน",
+    recommendedMenu: "Matcha Cold Whisk (70฿), Espresso (55฿)",
+    distanceKm: 6.7,
+    travelTimeMin: 10,
+    image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=700&q=85",
+    tags: ["☕ Speciality Coffee", "🔇 เงียบสงบ", "🟢 งบประหยัด"],
+    categories: ["budget"],
+    mapUrl: "https://maps.google.com/?cid=3701755522932382793"
+  }
+
+];
+
+
+/* =========================================
+   STATE
+========================================= */
+
+let bookmarkedIds =
+  JSON.parse(
+    localStorage.getItem(
+      'studyspot_bookmarks'
+    ) || '[]'
+  );
+
+let currentTab = 'ค้นหา';
+
+let currentCategory = 'all';
+
+
+/* =========================================
+   SETTINGS STATE
+========================================= */
+
+const settings = {
+
+  darkMode:
+    localStorage.getItem(
+      'studyspot_dark_mode'
+    ) === 'true',
+
+  notifications:
+    localStorage.getItem(
+      'studyspot_notifications'
+    ) !== 'false',
+
+  location:
+    localStorage.getItem(
+      'studyspot_location'
+    ) !== 'false'
+
+};
+
+
+/* =========================================
+   RENDER PLACES
+========================================= */
+
+function renderPlaces(data) {
+
+  const container =
+    document.getElementById(
+      'placeList'
+    );
+
+  container.innerHTML = '';
+
+
+  if (data.length === 0) {
+
+    container.innerHTML = `
+
+      <div class="empty-state">
+
+        <span class="empty-state-icon">
+          🔍
+        </span>
+
+        <p>
+          ไม่พบสถานที่ที่คุณกำลังค้นหา
+        </p>
+
+      </div>
+
+    `;
+
+    return;
   }
 
 
-  /* =========================================
-     DETAIL MODAL
-  ========================================= */
+  data.forEach(place => {
 
-  function openDetailModal(placeId) {
+    const card =
+      document.createElement('div');
 
-    const place =
-      places.find(p => p.id === placeId);
-
-    if (!place) return;
+    card.className =
+      'place-card';
 
 
-    document.getElementById('modalName')
-      .textContent = place.name;
+    const isBookmarked =
+      bookmarkedIds.includes(
+        place.id
+      );
 
 
-    const modalBody =
-      document.getElementById('modalBody');
+    card.innerHTML = `
+
+      <div class="place-img-container">
+
+        <button
+          class="bookmark-btn"
+          onclick="toggleBookmark(event, ${place.id})"
+          aria-label="บันทึก ${place.name}"
+        >
+          ${isBookmarked ? '❤️' : '🤍'}
+        </button>
+
+        <img
+          src="${place.image}"
+          alt="${place.name}"
+          class="place-img"
+          loading="lazy"
+          onclick="openDetailModal(${place.id})"
+        >
+
+      </div>
 
 
-    modalBody.innerHTML = `
-
-      <img
-        src="${place.image}"
-        alt="${place.name}"
-        class="modal-img"
+      <div
+        class="place-meta-bar"
+        onclick="openDetailModal(${place.id})"
       >
 
+        <div class="meta-item">
 
-      <div class="info-row">
-        <span class="info-label">
-          ราคาเริ่มต้น:
-        </span>
+          <span>
+            🕒
+          </span>
 
-        <span>
-          ${place.price}
-        </span>
+          <span>
+            ${place.hours}
+          </span>
+
+        </div>
+
+
+        <div class="meta-item">
+
+          <span>
+            📍
+          </span>
+
+          <span>
+            ${place.distanceKm} กม.
+            (${place.travelTimeMin} นาที)
+          </span>
+
+        </div>
+
       </div>
 
 
-      <div class="info-row">
-        <span class="info-label">
-          ทำเลที่ตั้ง:
-        </span>
+      <div
+        class="place-info"
+        onclick="openDetailModal(${place.id})"
+      >
 
-        <span>
-          ${place.detail}
-        </span>
-      </div>
+        <div class="place-title-row">
 
+          <div class="place-name">
+            ${place.name}
+          </div>
 
-      <div class="info-row">
-        <span class="info-label">
-          เวลาเปิด-ปิด:
-        </span>
+          <div class="place-price">
+            ${place.price}
+          </div>
 
-        <span>
-          ${place.hours}
-        </span>
-      </div>
+        </div>
 
 
-      <div class="info-row">
-        <span class="info-label">
-          จุดเด่น:
-        </span>
+        <div class="place-location">
+          📍 ${place.detail}
+        </div>
 
-        <span>
+
+        <div class="place-highlight">
           ${place.highlight}
-        </span>
-      </div>
+        </div>
 
 
-      <div class="info-row">
-        <span class="info-label">
-          เมนูแนะนำ:
-        </span>
+        <div class="feature-tags">
 
-        <span>
-          ${place.recommendedMenu}
-        </span>
-      </div>
+          ${place.tags
+            .map(tag =>
+              `<span class="tag">${tag}</span>`
+            )
+            .join('')}
 
-
-      <div class="info-row">
-        <span class="info-label">
-          การจอดรถ:
-        </span>
-
-        <span>
-          ${place.parking}
-        </span>
-      </div>
-
-
-      <div class="info-row">
-        <span class="info-label">
-          เบอร์ติดต่อ:
-        </span>
-
-        <span>
-          ${place.phone}
-        </span>
-      </div>
-
-
-      <div class="feature-tags">
-
-        ${place.tags
-          .map(tag =>
-            `<span class="tag">${tag}</span>`
-          )
-          .join('')
-        }
+        </div>
 
       </div>
-
-
-      <a
-        class="action-btn"
-        href="${place.mapUrl}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        📍 เปิดแผนที่ Google Maps นำทาง
-      </a>
 
     `;
 
 
-    const modal =
-      document.getElementById('detailModal');
+    container.appendChild(card);
 
-    modal.style.display = 'flex';
+  });
 
-    document.body.style.overflow = 'hidden';
+}
+
+
+/* =========================================
+   DETAIL MODAL
+========================================= */
+
+function openDetailModal(placeId) {
+
+  const place =
+    places.find(
+      p => p.id === placeId
+    );
+
+  if (!place) return;
+
+
+  document.getElementById(
+    'modalName'
+  ).textContent =
+    place.name;
+
+
+  const modalBody =
+    document.getElementById(
+      'modalBody'
+    );
+
+
+  modalBody.innerHTML = `
+
+    <img
+      src="${place.image}"
+      alt="${place.name}"
+      class="modal-img"
+    >
+
+
+    <div class="info-row">
+
+      <span class="info-label">
+        ราคาเริ่มต้น:
+      </span>
+
+      <span>
+        ${place.price}
+      </span>
+
+    </div>
+
+
+    <div class="info-row">
+
+      <span class="info-label">
+        ทำเลที่ตั้ง:
+      </span>
+
+      <span>
+        ${place.detail}
+      </span>
+
+    </div>
+
+
+    <div class="info-row">
+
+      <span class="info-label">
+        เวลาเปิด-ปิด:
+      </span>
+
+      <span>
+        ${place.hours}
+      </span>
+
+    </div>
+
+
+    <div class="info-row">
+
+      <span class="info-label">
+        จุดเด่น:
+      </span>
+
+      <span>
+        ${place.highlight}
+      </span>
+
+    </div>
+
+
+    <div class="info-row">
+
+      <span class="info-label">
+        เมนูแนะนำ:
+      </span>
+
+      <span>
+        ${place.recommendedMenu}
+      </span>
+
+    </div>
+
+
+    <div class="info-row">
+
+      <span class="info-label">
+        การจอดรถ:
+      </span>
+
+      <span>
+        ${place.parking}
+      </span>
+
+    </div>
+
+
+    <div class="info-row">
+
+      <span class="info-label">
+        เบอร์ติดต่อ:
+      </span>
+
+      <span>
+        ${place.phone}
+      </span>
+
+    </div>
+
+
+    <div class="feature-tags">
+
+      ${place.tags
+        .map(tag =>
+          `<span class="tag">${tag}</span>`
+        )
+        .join('')}
+
+    </div>
+
+
+    <a
+      class="action-btn"
+      href="${place.mapUrl}"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      📍 เปิดแผนที่ Google Maps นำทาง
+    </a>
+
+  `;
+
+
+  const modal =
+    document.getElementById(
+      'detailModal'
+    );
+
+
+  modal.style.display =
+    'flex';
+
+
+  document.body.style.overflow =
+    'hidden';
+}
+
+
+function closeModal() {
+
+  document.getElementById(
+    'detailModal'
+  ).style.display =
+    'none';
+
+  document.body.style.overflow =
+    'hidden';
+}
+
+
+function handleOverlayClick(event) {
+
+  if (
+    event.target ===
+    document.getElementById(
+      'detailModal'
+    )
+  ) {
+
+    closeModal();
+
   }
 
-
-  function closeModal() {
-
-    document.getElementById('detailModal')
-      .style.display = 'none';
-
-    document.body.style.overflow = 'hidden';
-  }
+}
 
 
-  function handleOverlayClick(event) {
+/* =========================================
+   SEARCH
+========================================= */
 
-    if (
-      event.target ===
-      document.getElementById('detailModal')
-    ) {
-      closeModal();
-    }
+function handleSearch() {
 
-  }
-
-
-  /* =========================================
-     SEARCH
-  ========================================= */
-
-  function handleSearch() {
-
-    const query =
-      document
-        .getElementById('searchInput')
-        .value
-        .toLowerCase()
-        .trim();
+  const query =
+    document
+      .getElementById(
+        'searchInput'
+      )
+      .value
+      .toLowerCase()
+      .trim();
 
 
-    const filtered =
-      places.filter(place => {
+  const filtered =
+    places.filter(place => {
 
-        const matchesText =
-          place.name
-            .toLowerCase()
-            .includes(query)
+      const matchesText =
 
-          ||
+        place.name
+          .toLowerCase()
+          .includes(query)
 
-          place.detail
-            .toLowerCase()
-            .includes(query)
+        ||
 
-          ||
+        place.detail
+          .toLowerCase()
+          .includes(query)
 
-          place.highlight
-            .toLowerCase()
-            .includes(query);
+        ||
 
-
-        const matchesCategory =
-          currentCategory === 'all'
-          ||
-          place.categories.includes(
-            currentCategory
-          );
+        place.highlight
+          .toLowerCase()
+          .includes(query);
 
 
-        return matchesText && matchesCategory;
+      const matchesCategory =
 
-      });
+        currentCategory === 'all'
 
+        ||
 
-    renderPlaces(filtered);
-
-    scrollToTop();
-  }
-
-
-  /* =========================================
-     BOOKMARK
-  ========================================= */
-
-  function toggleBookmark(event, placeId) {
-
-    event.stopPropagation();
+        place.categories.includes(
+          currentCategory
+        );
 
 
-    const index =
-      bookmarkedIds.indexOf(placeId);
-
-
-    if (index > -1) {
-
-      bookmarkedIds.splice(index, 1);
-
-    } else {
-
-      bookmarkedIds.push(placeId);
-
-    }
-
-
-    if (currentTab === 'ค้นหา') {
-
-      handleSearch();
-
-    } else if (currentTab === 'บุ๊กมาร์ก') {
-
-      renderBookmarks();
-
-    }
-
-  }
-
-
-  function renderBookmarks() {
-
-    const bookmarkedPlaces =
-      places.filter(place =>
-        bookmarkedIds.includes(place.id)
+      return (
+        matchesText &&
+        matchesCategory
       );
 
-
-    if (bookmarkedPlaces.length === 0) {
-
-      const container =
-        document.getElementById('placeList');
+    });
 
 
-      container.innerHTML = `
+  renderPlaces(filtered);
 
-        <div class="empty-state">
+}
 
-          <span class="empty-state-icon">
-            ⭐
-          </span>
 
-          <p>
-            ยังไม่มีรายการที่ถูกบันทึกไว้
-          </p>
+/* =========================================
+   BOOKMARK
+========================================= */
 
-          <small>
-            กด 🤍 บนสถานที่ที่คุณชอบ
-          </small>
+function toggleBookmark(
+  event,
+  placeId
+) {
 
-        </div>
+  event.stopPropagation();
 
-      `;
 
-    } else {
+  const index =
+    bookmarkedIds.indexOf(
+      placeId
+    );
 
-      renderPlaces(bookmarkedPlaces);
 
-    }
+  if (index > -1) {
 
-    scrollToTop();
+    bookmarkedIds.splice(
+      index,
+      1
+    );
+
+  } else {
+
+    bookmarkedIds.push(
+      placeId
+    );
+
   }
 
 
-  /* =========================================
-     PROFILE
-  ========================================= */
+  localStorage.setItem(
+    'studyspot_bookmarks',
+    JSON.stringify(
+      bookmarkedIds
+    )
+  );
 
-  function renderProfile() {
+
+  if (
+    currentTab === 'ค้นหา'
+  ) {
+
+    handleSearch();
+
+  }
+
+  else if (
+    currentTab === 'บุ๊กมาร์ก'
+  ) {
+
+    renderBookmarks();
+
+  }
+
+}
+
+
+/* =========================================
+   BOOKMARK PAGE
+========================================= */
+
+function renderBookmarks() {
+
+  const bookmarkedPlaces =
+    places.filter(place =>
+      bookmarkedIds.includes(
+        place.id
+      )
+    );
+
+
+  if (
+    bookmarkedPlaces.length === 0
+  ) {
 
     const container =
-      document.getElementById('placeList');
-
-
-    const userMapUrl =
-      `https://www.google.com/maps/search/?api=1&query=${userInfo.lat},${userInfo.lng}`;
+      document.getElementById(
+        'placeList'
+      );
 
 
     container.innerHTML = `
 
-      <div class="profile-card">
+      <div class="empty-state">
 
-        <div class="profile-title">
-          ข้อมูลส่วนตัวผู้ใช้
-        </div>
+        <span class="empty-state-icon">
+          ⭐
+        </span>
 
+        <p>
+          ยังไม่มีรายการที่ถูกบันทึกไว้
+        </p>
 
-        <div class="info-row">
-          <span class="info-label">
-            ชื่อ-นามสกุล:
-          </span>
-
-          <span>
-            ${userInfo.name}
-          </span>
-        </div>
-
-
-        <div class="info-row">
-          <span class="info-label">
-            รหัสนักศึกษา:
-          </span>
-
-          <span>
-            ${userInfo.studentId}
-          </span>
-        </div>
-
-
-        <div class="info-row">
-          <span class="info-label">
-            พิกัดปัจจุบัน:
-          </span>
-
-          <span>
-            ${userInfo.location}
-          </span>
-        </div>
-
-
-        <a
-          class="action-btn"
-          href="${userMapUrl}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          📍 เปิดแผนที่พิกัดของฉัน
-        </a>
+        <small>
+          กด 🤍 บนสถานที่ที่คุณชอบ
+        </small>
 
       </div>
 
     `;
 
-    scrollToTop();
+  }
+
+  else {
+
+    renderPlaces(
+      bookmarkedPlaces
+    );
+
   }
 
 
-  /* =========================================
-     FILTER
-  ========================================= */
+  scrollToTop();
 
-  function filterPlaces(category, element) {
-
-    currentCategory = category;
+}
 
 
-    document
-      .querySelectorAll('.filter-chip')
-      .forEach(button => {
+/* =========================================
+   SETTINGS
+========================================= */
 
-        button.classList.remove('active');
+function renderSettings() {
 
-      });
+  const container =
+    document.getElementById(
+      'placeList'
+    );
 
 
-    element.classList.add('active');
+  container.innerHTML = `
+
+    <div class="settings-card">
+
+      <div class="settings-title">
+        ⚙️ การตั้งค่า
+      </div>
+
+
+      <div class="settings-description">
+        ปรับแต่งการใช้งาน StudySpot
+        ให้เหมาะกับคุณ
+      </div>
+
+
+      <!-- DARK MODE -->
+
+      <div class="setting-item">
+
+        <div class="setting-info">
+
+          <div class="setting-icon">
+            🌙
+          </div>
+
+          <div class="setting-text">
+
+            <div class="setting-name">
+              โหมดมืด
+            </div>
+
+            <div class="setting-description">
+              เปลี่ยนธีมของเว็บไซต์เป็นโหมดมืด
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <label class="toggle">
+
+          <input
+            type="checkbox"
+            ${settings.darkMode ? 'checked' : ''}
+            onchange="toggleDarkMode(this.checked)"
+          >
+
+          <span class="toggle-slider"></span>
+
+        </label>
+
+      </div>
+
+
+      <!-- NOTIFICATIONS -->
+
+      <div class="setting-item">
+
+        <div class="setting-info">
+
+          <div class="setting-icon">
+            🔔
+          </div>
+
+          <div class="setting-text">
+
+            <div class="setting-name">
+              การแจ้งเตือน
+            </div>
+
+            <div class="setting-description">
+              เปิดหรือปิดการแจ้งเตือนของเว็บไซต์
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <label class="toggle">
+
+          <input
+            type="checkbox"
+            ${settings.notifications ? 'checked' : ''}
+            onchange="toggleNotifications(this.checked)"
+          >
+
+          <span class="toggle-slider"></span>
+
+        </label>
+
+      </div>
+
+
+      <!-- LOCATION -->
+
+      <div class="setting-item">
+
+        <div class="setting-info">
+
+          <div class="setting-icon">
+            📍
+          </div>
+
+          <div class="setting-text">
+
+            <div class="setting-name">
+              ใช้ตำแหน่งของฉัน
+            </div>
+
+            <div class="setting-description">
+              อนุญาตให้ใช้ตำแหน่งเพื่อแนะนำสถานที่ใกล้ตัว
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <label class="toggle">
+
+          <input
+            type="checkbox"
+            ${settings.location ? 'checked' : ''}
+            onchange="toggleLocation(this.checked)"
+          >
+
+          <span class="toggle-slider"></span>
+
+        </label>
+
+      </div>
+
+
+      <!-- CLEAR BOOKMARKS -->
+
+      <button
+        class="settings-danger-btn"
+        onclick="clearBookmarks()"
+      >
+        🗑️ ล้างรายการโปรดทั้งหมด
+      </button>
+
+
+      <div class="settings-version">
+        StudySpot • เวอร์ชัน 1.0.0
+      </div>
+
+    </div>
+
+  `;
+
+
+  scrollToTop();
+
+}
+
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+function toggleDarkMode(
+  enabled
+) {
+
+  settings.darkMode =
+    enabled;
+
+
+  localStorage.setItem(
+    'studyspot_dark_mode',
+    enabled
+  );
+
+
+  document.body.classList.toggle(
+    'dark-mode',
+    enabled
+  );
+
+}
+
+
+/* =========================================
+   NOTIFICATIONS
+========================================= */
+
+function toggleNotifications(
+  enabled
+) {
+
+  settings.notifications =
+    enabled;
+
+
+  localStorage.setItem(
+    'studyspot_notifications',
+    enabled
+  );
+
+}
+
+
+/* =========================================
+   LOCATION
+========================================= */
+
+function toggleLocation(
+  enabled
+) {
+
+  settings.location =
+    enabled;
+
+
+  localStorage.setItem(
+    'studyspot_location',
+    enabled
+  );
+
+}
+
+
+/* =========================================
+   CLEAR BOOKMARKS
+========================================= */
+
+function clearBookmarks() {
+
+  if (
+    bookmarkedIds.length === 0
+  ) {
+
+    alert(
+      'ยังไม่มีรายการโปรดที่บันทึกไว้'
+    );
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+      'คุณต้องการล้างรายการโปรดทั้งหมดหรือไม่?'
+    );
+
+
+  if (!confirmed) {
+    return;
+  }
+
+
+  bookmarkedIds = [];
+
+
+  localStorage.removeItem(
+    'studyspot_bookmarks'
+  );
+
+
+  alert(
+    'ล้างรายการโปรดเรียบร้อยแล้ว'
+  );
+
+
+  renderSettings();
+
+}
+
+
+/* =========================================
+   FILTER
+========================================= */
+
+function filterPlaces(
+  category,
+  element
+) {
+
+  currentCategory =
+    category;
+
+
+  document
+    .querySelectorAll(
+      '.filter-chip'
+    )
+    .forEach(button => {
+
+      button.classList.remove(
+        'active'
+      );
+
+    });
+
+
+  element.classList.add(
+    'active'
+  );
+
+
+  handleSearch();
+
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function switchNav(
+  element,
+  pageName
+) {
+
+  currentTab =
+    pageName;
+
+
+  document
+    .querySelectorAll(
+      '.nav-item'
+    )
+    .forEach(item => {
+
+      item.classList.remove(
+        'active'
+      );
+
+    });
+
+
+  element.classList.add(
+    'active'
+  );
+
+
+  navigateTo(
+    pageName
+  );
+
+}
+
+
+function switchNavToSettings() {
+
+  const settingsNav =
+    document.getElementById(
+      'navSettings'
+    );
+
+
+  switchNav(
+    settingsNav,
+    'ตั้งค่า'
+  );
+
+}
+
+
+/* =========================================
+   NAVIGATION ROUTING
+========================================= */
+
+function navigateTo(
+  pageName
+) {
+
+  const filterGroup =
+    document.getElementById(
+      'filterGroupContainer'
+    );
+
+
+  const searchBox =
+    document.getElementById(
+      'searchBoxContainer'
+    );
+
+
+  const headerTitle =
+    document.getElementById(
+      'headerTitle'
+    );
+
+
+  if (
+    pageName === 'ค้นหา'
+  ) {
+
+    filterGroup.style.display =
+      'flex';
+
+    searchBox.style.display =
+      'block';
+
+    headerTitle.textContent =
+      'พิกัดที่อ่านหนังสือวันนี้';
 
 
     handleSearch();
+
   }
 
 
-  /* =========================================
-     NAVIGATION
-  ========================================= */
+  else if (
+    pageName === 'บุ๊กมาร์ก'
+  ) {
 
-  function switchNav(element, pageName) {
+    filterGroup.style.display =
+      'none';
 
-    currentTab = pageName;
+    searchBox.style.display =
+      'none';
 
-
-    document
-      .querySelectorAll('.nav-item')
-      .forEach(item => {
-
-        item.classList.remove('active');
-
-      });
+    headerTitle.textContent =
+      'ร้านที่บุ๊กมาร์กไว้ ⭐';
 
 
-    element.classList.add('active');
+    renderBookmarks();
 
-
-    navigateTo(pageName);
   }
 
 
-  function switchNavToProfile() {
+  else if (
+    pageName === 'แผนที่'
+  ) {
 
-    const profileNav =
-      document.getElementById('navProfile');
-
-
-    switchNav(
-      profileNav,
-      'โปรไฟล์'
+    window.open(
+      'https://www.google.com/maps/search/คาเฟ่อ่านหนังสือ+พิษณุโลก',
+      '_blank',
+      'noopener,noreferrer'
     );
-  }
-
-
-  function navigateTo(pageName) {
-
-    const filterGroup =
-      document.getElementById(
-        'filterGroupContainer'
-      );
-
-    const searchBox =
-      document.getElementById(
-        'searchBoxContainer'
-      );
-
-    const headerTitle =
-      document.getElementById(
-        'headerTitle'
-      );
-
-
-    if (pageName === 'ค้นหา') {
-
-      filterGroup.style.display = 'flex';
-
-      searchBox.style.display = 'block';
-
-      headerTitle.textContent ='พิกัดที่อ่านหนังสือวันนี้';
-
-
-      handleSearch();
-
-    }
-
-
-    else if (pageName === 'บุ๊กมาร์ก') {
-
-      filterGroup.style.display = 'none';
-
-      searchBox.style.display = 'none';
-
-      headerTitle.textContent =
-        'ร้านที่บุ๊กมาร์กไว้ ⭐';
-
-
-      renderBookmarks();
-
-    }
-
-
-    else if (pageName === 'แผนที่') {
-
-      window.open(
-        'https://www.google.com/maps/search/คาเฟ่อ่านหนังสือ+พิษณุโลก',
-        '_blank',
-        'noopener,noreferrer'
-      );
-
-    }
-
-
-    else if (pageName === 'โปรไฟล์') {
-
-      filterGroup.style.display = 'none';
-
-      searchBox.style.display = 'none';
-
-      headerTitle.textContent =
-        'โปรไฟล์ผู้ใช้ 👤';
-
-
-      renderProfile();
-
-    }
 
   }
 
 
-  /* =========================================
-     SCROLL
-  ========================================= */
+  else if (
+    pageName === 'ตั้งค่า'
+  ) {
 
-  const placeList =
-    document.getElementById('placeList');
+    filterGroup.style.display =
+      'none';
 
-  const backToTop =
-    document.getElementById('backToTop');
+    searchBox.style.display =
+      'none';
+
+    headerTitle.textContent =
+      'ตั้งค่า ⚙️';
 
 
-  placeList.addEventListener(
-    'scroll',
-    function() {
+    renderSettings();
 
-      if (placeList.scrollTop > 350) {
+  }
 
-        backToTop.classList.add('show');
+}
 
-      } else {
 
-        backToTop.classList.remove('show');
+/* =========================================
+   SCROLL
+========================================= */
 
-      }
-
-    },
-    { passive: true }
+const placeList =
+  document.getElementById(
+    'placeList'
   );
 
 
-  function scrollToTop() {
-
-    placeList.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-
-  }
-
-
-  /* =========================================
-     KEYBOARD
-  ========================================= */
-
-  document.addEventListener(
-    'keydown',
-    function(event) {
-
-      if (
-        event.key === 'Escape'
-      ) {
-
-        closeModal();
-
-      }
-
-    }
+const backToTop =
+  document.getElementById(
+    'backToTop'
   );
 
 
-  /* =========================================
-     INITIAL LOAD
-  ========================================= */
+placeList.addEventListener(
+  'scroll',
+  function() {
 
-  renderPlaces(places);
+    if (
+      placeList.scrollTop > 350
+    ) {
+
+      backToTop.classList.add(
+        'show'
+      );
+
+    }
+
+    else {
+
+      backToTop.classList.remove(
+        'show'
+      );
+
+    }
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+function scrollToTop() {
+
+  placeList.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+
+}
+
+
+/* =========================================
+   KEYBOARD
+========================================= */
+
+document.addEventListener(
+  'keydown',
+  function(event) {
+
+    if (
+      event.key === 'Escape'
+    ) {
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   INITIAL SETTINGS
+========================================= */
+
+document.body.classList.toggle(
+  'dark-mode',
+  settings.darkMode
+);
+
+
+/* =========================================
+   INITIAL LOAD
+========================================= */
+
+renderPlaces(
+  places
+);
 
 </script>
 
